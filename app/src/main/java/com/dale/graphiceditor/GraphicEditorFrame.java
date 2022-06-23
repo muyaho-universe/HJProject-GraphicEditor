@@ -40,10 +40,13 @@ public class GraphicEditorFrame extends JFrame{
 	private int x;
     private int y;
     
+    private String[] locations = {"bottom", "right",  "angle"}; 
+    DragPoint[] points = new DragPoint[3]; 
 	MyMouse myMouse = new MyMouse();
 	
+	
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		GraphicEditorFrame mainFrame = new GraphicEditorFrame();
 		mainFrame.run(mainFrame);
 	}
@@ -83,6 +86,7 @@ public class GraphicEditorFrame extends JFrame{
 		JPanel toolsPanel =  new JPanel();
 		JPanel drawablePanel =  new JPanel();
 		
+				
 		additionalFunctionPanel.setLayout(null);
 		attributesPanel.setLayout(null);
 		selectShapePanel.setLayout(null);
@@ -121,22 +125,14 @@ public class GraphicEditorFrame extends JFrame{
 		//START POINT: setting drawablePanel
 		drawablePanel.setBounds(drawablePanelX, drawablePanelY, drawablePanelWidth, drawablePanelHeight);
 		drawablePanel.setBackground(Color.WHITE);
-		drawablePanel.setLayout(new FlowLayout());
+		drawablePanel.setLayout(null);
 		drawablePanel.setMinimumSize(new Dimension(5, 5));
 		drawablePanel.setMaximumSize(new Dimension(monitorWidth, skectchAreaPanelHeight / 2));
-		drawablePanel.addMouseListener(new MouseAdapter(){
-		       public void mousePressed(MouseEvent ev){
-		           x = ev.getX ();
-		           y = ev.getY();
-		          }
-		       });
-		drawablePanel.addMouseMotionListener(new MouseMotionAdapter() {
-            public void mouseDragged(MouseEvent evt) {
-                int newX = evt.getXOnScreen()-  x;
-                int newY = evt.getYOnScreen() - y;
-                drawablePanel.setSize(newX, newY); 
-            }
-        });
+		for(int i = 0; i < 3; i ++) {
+			points[i] = new DragPoint(locations[i]);
+			drawablePanel.add(points[i]);
+		}
+		
 		skectchAreaPanel.add(drawablePanel);
 		//END POINT
 		
