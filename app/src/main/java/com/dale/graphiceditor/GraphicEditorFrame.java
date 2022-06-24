@@ -9,10 +9,11 @@ import javax.swing.JPanel;
 
 import com.dale.graphiceditor.mouse.*;
 import com.dale.graphiceditor.buttons.*;
+import com.dale.graphiceditor.panel.*;
 
 public class GraphicEditorFrame extends JFrame{
-	static int monitorWidth;
-	static int monitorHeight;
+	static public int monitorWidth;
+	static public int monitorHeight;
 	static int additionalFunctionPanelWidth; // = monitorWidth;
 	static int additionalFunctionPanelHeight; // = monitorHeight * 7 /100;
 	static int attributesPanelWidth; // = monitorWidth * 32 / 100;
@@ -31,8 +32,8 @@ public class GraphicEditorFrame extends JFrame{
 	static int toolsPanelHeight; // = monitorHeight*15/100
 	static int toolsPanelX = 0;
 	static int toolsPanelY; // = monitorHeight * 7 /100
-	static int drawablePanelWidth; //= monitorWidth / 2, 
-	static int drawablePanelHeight; // = skectchAreaPanelHeight / 2
+	static public int drawablePanelWidth; //= monitorWidth / 2, 
+	static public int drawablePanelHeight; // = skectchAreaPanelHeight / 2
 	static int drawablePanelX = 5;
 	static int drawablePanelY = 5;
 
@@ -40,8 +41,7 @@ public class GraphicEditorFrame extends JFrame{
 	private int x;
     private int y;
     
-    private String[] locations = {"bottom", "right",  "angle"}; 
-    DragPoint[] points = new DragPoint[3]; 
+   
 	MyMouse myMouse = new MyMouse();
 	
 	
@@ -85,7 +85,7 @@ public class GraphicEditorFrame extends JFrame{
 //		JPanel skectchAreaPanel =  new JPanel();
 		Container skectchAreaPanel =  new Container();
 		JPanel toolsPanel =  new JPanel();
-		JPanel drawablePanel =  new JPanel();
+		ResizablePanel drawablePanel =  new ResizablePanel();
 		
 				
 		additionalFunctionPanel.setLayout(null);
@@ -129,10 +129,7 @@ public class GraphicEditorFrame extends JFrame{
 		drawablePanel.setLayout(null);
 		drawablePanel.setMinimumSize(new Dimension(5, 5));
 		drawablePanel.setMaximumSize(new Dimension(monitorWidth, skectchAreaPanelHeight / 2));
-		for(int i = 0; i < 3; i ++) {
-			points[i] = new DragPoint(locations[i], drawablePanel);
-			skectchAreaPanel.add(points[i]);
-		}
+		
 		
 		skectchAreaPanel.add(drawablePanel);
 		//END POINT

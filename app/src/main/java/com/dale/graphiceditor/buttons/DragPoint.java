@@ -1,4 +1,4 @@
-package com.dale.graphiceditor;
+package com.dale.graphiceditor.buttons;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -6,6 +6,8 @@ import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.JButton;
+
+import com.dale.graphiceditor.GraphicEditorFrame;
 
 public class DragPoint extends JButton {
 	private int x;
@@ -17,13 +19,14 @@ public class DragPoint extends JButton {
 	private boolean isDragged = false;
 	private int currentMouseX, currentMouseY;
 	private static final long serialVersionUID = 1L;
+	
 
 	public DragPoint() { 
 		super(); 
 		decorate(); 
 	} 
 	
-    public DragPoint(String text, JPanel drawablePanel) { 
+    public DragPoint(String text) { 
     	super(text);
     	if(text.equals("bottom")) {
     		
@@ -35,8 +38,8 @@ public class DragPoint extends JButton {
         		@Override
         		public void mouseEntered(MouseEvent e) {
         			hasMouse = true;
-        			isDragged = true;
-        			System.out.println("Entered " + " drawablePanel.getSize: " + drawablePanel.getSize());
+//        			isDragged = true;
+//        			System.out.println("Entered " + " drawablePanel.getSize: " + drawablePanel.getSize());
         		}
 
 				@Override
@@ -50,18 +53,15 @@ public class DragPoint extends JButton {
 					// TODO Auto-generated method stub
 					if(hasMouse) {
 						isDragged = true;
-					}
-					currentMouseX = e.getXOnScreen();
-					currentMouseY = e.getYOnScreen();
-					
-	 		        System.out.println("Pressed " + "currentMouseX: " + currentMouseX + " e.getY(): " + currentMouseY);
+					}			
+//	 		        System.out.println("Pressed " + "currentMouseX: " + currentMouseX + " e.getY(): " + currentMouseY);
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					// TODO Auto-generated method stub
 					isDragged = false;
-					System.out.println("Released " + " drawablePanel.getSize: " + drawablePanel.getSize());
+//					System.out.println("Released " + " drawablePanel.getSize: " + drawablePanel.getSize());
 				}
 
 				@Override
@@ -74,26 +74,7 @@ public class DragPoint extends JButton {
 					
 				}
         	});
-        	this.addMouseMotionListener(new MouseMotionAdapter() {
-				@Override
-				public void mouseDragged(MouseEvent evt) {
-					newX = evt.getX() - x;
-					newHeight = evt.getYOnScreen() - currentMouseY;
-					
-					System.out.println("Dragged! " + "evt.getXOnScreen(): " + evt.getXOnScreen() + " evt.getYOnScreen(): " + evt.getYOnScreen());
-					System.out.println("newHeight: " + newHeight);
-//					GraphicEditorFrame.drawablePanelHeight  += newHeight;
-					System.out.println("newX: " + newX + " newHeight " + GraphicEditorFrame.drawablePanelHeight); 
-					
-					drawablePanel.setSize(GraphicEditorFrame.drawablePanelWidth, y+newHeight);
-					currentMouseY = 0;
-				}				
-			});
-        	if(isDragged) {
-				y = newHeight;
-				this.setBounds(x, newHeight, 10, 10);
-				isDragged = false;
-			}
+        	
         	System.out.println("Dragged: " + hasMouse + " newX " + newX + " newY " );
         }
     	
