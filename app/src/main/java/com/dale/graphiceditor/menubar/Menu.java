@@ -7,5 +7,7 @@ import java.util.*;
 
 
 public class Menu extends JMenu{
-
+	Menu(){
+		super("ÆÄÀÏ");
+	}
 }
