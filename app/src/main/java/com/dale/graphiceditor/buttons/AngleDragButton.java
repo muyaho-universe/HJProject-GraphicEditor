@@ -7,6 +7,6 @@ import javax.swing.JButton;
 
 import com.dale.graphiceditor.GraphicEditorFrame;
 
-public class AngleDragButton extends JButton {
+public class AngleDragButton extends DragPoint {
 
 }
