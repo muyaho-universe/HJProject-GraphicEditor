@@ -14,9 +14,11 @@ public class AdditionalFunctions extends JPanel {
 	}
 	
 	public void setSize() {
-		setBounds(0, 0, GraphicEditorFrame.additionalFunctionPanelWidth- 100, GraphicEditorFrame.additionalFunctionPanelHeight);
+		setBounds(0, GraphicEditorFrame.additionalFunctionPanelHeight / 2, GraphicEditorFrame.additionalFunctionPanelWidth- 100, GraphicEditorFrame.additionalFunctionPanelHeight / 2);
 	}
 	public void setMenuBar() {
 		menuBar = new MenuBar();
+		menuBar.createMenuBar();
+		this.add(menuBar);
 	}
 }

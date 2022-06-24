@@ -10,4 +10,12 @@ public class Menu extends JMenu{
 	Menu(){
 		super("ÆÄÀÏ");
 	}
+	
+	public void createMenu() {
+		SaveFileMenuItem saveFileMenuItem = new SaveFileMenuItem();
+		LoadFileMenuItem loadFileMenuItem = new LoadFileMenuItem();
+		
+		this.add(saveFileMenuItem);
+		this.add(loadFileMenuItem);
+	}
 }

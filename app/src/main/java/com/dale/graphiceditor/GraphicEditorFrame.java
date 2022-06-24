@@ -4,8 +4,8 @@ import java.awt.*;
 
 import java.awt.event.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
+
 
 import com.dale.graphiceditor.mouse.*;
 import com.dale.graphiceditor.buttons.*;
@@ -95,7 +95,7 @@ public class GraphicEditorFrame extends JFrame{
 		mainPanel.setBackground(new Color(125, 0, 0));
 		//START POINT: setting additionalFunctionPanel
 		additionalFunctionPanel.setSize();
-
+		additionalFunctionPanel.setMenuBar();
 		//END POINT
 		
 		//START POINT: setting toolsPanel
@@ -130,6 +130,7 @@ public class GraphicEditorFrame extends JFrame{
 		mainPanel.add(additionalFunctionPanel);
 		mainPanel.add(skectchArea);
 		
+		this.setJMenuBar(additionalFunctionPanel.menuBar);
 		this.add(mainPanel);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -9,6 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 
 public class SaveFileMenuItem extends JMenuItem implements ActionListener{
+	SaveFileMenuItem(){
+		super("파일 저장");
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
