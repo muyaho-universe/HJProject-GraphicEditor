@@ -1,5 +1,7 @@
 package com.dale.graphiceditor;
 
-public class SelectShape {
+import javax.swing.*;
+
+public class SelectShape extends JPanel {
 
 }
