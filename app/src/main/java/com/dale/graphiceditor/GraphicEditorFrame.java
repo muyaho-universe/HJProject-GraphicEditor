@@ -82,7 +82,8 @@ public class GraphicEditorFrame extends JFrame{
 		JPanel attributesPanel =  new JPanel();
 		JPanel selectShapePanel = new JPanel();
 //		Container skectchAreaPanel =  new Container();
-		JPanel skectchAreaPanel =  new JPanel();
+//		JPanel skectchAreaPanel =  new JPanel();
+		Container skectchAreaPanel =  new Container();
 		JPanel toolsPanel =  new JPanel();
 		JPanel drawablePanel =  new JPanel();
 		
@@ -129,8 +130,8 @@ public class GraphicEditorFrame extends JFrame{
 		drawablePanel.setMinimumSize(new Dimension(5, 5));
 		drawablePanel.setMaximumSize(new Dimension(monitorWidth, skectchAreaPanelHeight / 2));
 		for(int i = 0; i < 3; i ++) {
-			points[i] = new DragPoint(locations[i]);
-			drawablePanel.add(points[i]);
+			points[i] = new DragPoint(locations[i], drawablePanel);
+			skectchAreaPanel.add(points[i]);
 		}
 		
 		skectchAreaPanel.add(drawablePanel);

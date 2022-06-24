@@ -1,9 +1,8 @@
 package com.dale.graphiceditor;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
+import java.awt.event.*;
+
 
 import javax.swing.*;
 import javax.swing.JButton;
@@ -11,52 +10,108 @@ import javax.swing.JButton;
 public class DragPoint extends JButton {
 	private int x;
 	private int y;
-	
-	/**
-	 * 
-	 */
+	private int newX;
+	private int newHeight;
+	private String buttonName;
+	private boolean hasMouse = false;
+	private boolean isDragged = false;
+	private int currentMouseX, currentMouseY;
 	private static final long serialVersionUID = 1L;
 
 	public DragPoint() { 
-		super(); decorate(); 
+		super(); 
+		decorate(); 
 	} 
-    public DragPoint(String text) { 
-    	super(text); 
+	
+    public DragPoint(String text, JPanel drawablePanel) { 
+    	super(text);
     	if(text.equals("bottom")) {
-    		x = GraphicEditorFrame.drawablePanelWidth / 2;
-    		y = GraphicEditorFrame.drawablePanelHeight;
-    		this.setBounds(x, y, 10, 10);
     		
-    		this.addMouseListener(new MouseAdapter(){
-    			
+    		x = GraphicEditorFrame.drawablePanelWidth /2;
+        	y = GraphicEditorFrame.drawablePanelHeight;
+        	this.setBounds(x, y, 10, 10);
+        	
+        	this.addMouseListener(new MouseListener() {
+        		@Override
+        		public void mouseEntered(MouseEvent e) {
+        			hasMouse = true;
+        			isDragged = true;
+        			System.out.println("Entered " + " drawablePanel.getSize: " + drawablePanel.getSize());
+        		}
+
 				@Override
- 		       	public void mousePressed(MouseEvent ev){
- 		           x = ev.getX ();
- 		           y = ev.getY();
-    			}
-    			
-    		});
-//    		this.addMouseMotionListener(new MouseMotionAdapter() {
-//    			public void mouseDragged(MouseEvent evt) {
-//	                 int newX = evt.getXOnScreen()-  x;
-//	                 int newY = evt.getYOnScreen() - y;
-//	                 this.setSize(newX, newY); 
-//    			}
-//    		});
-    		this.addMouseListener(null);
-    	}
+				public void mouseClicked(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					if(hasMouse) {
+						isDragged = true;
+					}
+					currentMouseX = e.getXOnScreen();
+					currentMouseY = e.getYOnScreen();
+					
+	 		        System.out.println("Pressed " + "currentMouseX: " + currentMouseX + " e.getY(): " + currentMouseY);
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					isDragged = false;
+					System.out.println("Released " + " drawablePanel.getSize: " + drawablePanel.getSize());
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					if(!isDragged) {
+						hasMouse = false;
+						System.out.println("Exits ");
+					}
+					
+				}
+        	});
+        	this.addMouseMotionListener(new MouseMotionAdapter() {
+				@Override
+				public void mouseDragged(MouseEvent evt) {
+					newX = evt.getX() - x;
+					newHeight = evt.getYOnScreen() - currentMouseY;
+					
+					System.out.println("Dragged! " + "evt.getXOnScreen(): " + evt.getXOnScreen() + " evt.getYOnScreen(): " + evt.getYOnScreen());
+					System.out.println("newHeight: " + newHeight);
+//					GraphicEditorFrame.drawablePanelHeight  += newHeight;
+					System.out.println("newX: " + newX + " newHeight " + GraphicEditorFrame.drawablePanelHeight); 
+					
+					drawablePanel.setSize(GraphicEditorFrame.drawablePanelWidth, y+newHeight);
+					currentMouseY = 0;
+				}				
+			});
+        	if(isDragged) {
+				y = newHeight;
+				this.setBounds(x, newHeight, 10, 10);
+				isDragged = false;
+			}
+        	System.out.println("Dragged: " + hasMouse + " newX " + newX + " newY " );
+        }
+    	
     	if(text.equals("right")) {
-    		x = GraphicEditorFrame.drawablePanelWidth ;
-    		y = GraphicEditorFrame.drawablePanelHeight/ 2;
-    		this.setBounds(x, y, 10, 10);
+    		x = GraphicEditorFrame.drawablePanelWidth;
+        	y = GraphicEditorFrame.drawablePanelHeight / 2;
+        	this.setBounds(x, y, 10, 10);
     	}
-    	else {
-    		x = GraphicEditorFrame.drawablePanelWidth ;
-    		y = GraphicEditorFrame.drawablePanelHeight;
-    		this.setBounds(x, y, 10, 10);
+    	
+    	if(text.equals("angle")) {
+    		x = GraphicEditorFrame.drawablePanelWidth;
+        	y = GraphicEditorFrame.drawablePanelHeight;
+        	this.setBounds(x, y, 10, 10);
     	}
+    	
     	decorate(); 
     } 
+    
     public DragPoint(Action action) { 
     	super(action); 
     	decorate(); 
@@ -70,7 +125,7 @@ public class DragPoint extends JButton {
     	decorate(); 
     } 
     protected void decorate() { 
-    	setBorderPainted(false); 
+    	setBorderPainted(true); 
     	setOpaque(false); 
     }
     
