@@ -12,22 +12,24 @@ import java.awt.event.*;
 public class ResizablePanel extends JPanel {
 	
 	private Point dragLocation  = new Point();
-	private String[] locations = {"bottom", "right",  "angle"};
+	private int width, height;
 	BottomDragButton bottomDragButton = new BottomDragButton("bottom");
 	AngleDragButton angleDragButton = new AngleDragButton("angle");
 	RightDragButton rightDragButton = new RightDragButton("right");
 	
-	DrawablePanel canvas = new DrawablePanel();
+	DrawablePanel drawablePanel =  new DrawablePanel();
 	
 	public  ResizablePanel() {
+		width = this.getWidth();
+		height = this.getHeight();
 		System.out.println("Made!");
 		this.add(angleDragButton);
 		this.add(bottomDragButton);
 		this.add(rightDragButton);
-		canvas.setOpaque(false);
-		canvas.setBounds(0, 0, this.getWidth()-40, this.getHeight()-40);
-		canvas.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-		add(canvas);
+//		canvas.setBackground(Color.BLACK);
+//		canvas.setBounds(0, 0, this.getWidth()-40, this.getHeight()-40);
+//		canvas.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+//		add(canvas);
 		this.setLayout(null);
 		this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		
@@ -58,8 +60,7 @@ public class ResizablePanel extends JPanel {
 	            if(rightDragButton.isDragged()) {
 	            	if (dragLocation.getX()> getWidth()-10 && dragLocation.getY()>getHeight()-10) {
 	                    System.err.println("in");
-	                    setSize((int)(getWidth()+(e.getPoint().getX()-dragLocation.getX())),
-	                            (int)(getHeight()+(e.getPoint().getY()-dragLocation.getY())));
+	                    setSize(, (int)(getHeight()+(e.getPoint().getY()-dragLocation.getY())));
 	                    dragLocation = e.getPoint();
 	                }
 	            }
@@ -67,6 +68,9 @@ public class ResizablePanel extends JPanel {
 		});
 		
 		this.setOpaque(false);
-		
+		//START POINT: setting drawablePanel
+				
+		this.add(drawablePanel);
+		//END POINT
 	}
 }

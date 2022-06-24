@@ -119,6 +119,7 @@ public class DragPoint extends JButton {
 		int textX = (width - stringBounds.width) / 2; 
 		int textY = (height - stringBounds.height) / 2 + fontMetrics.getAscent(); 
 		
+		graphics.setBackground(o);
 		graphics.setColor(o); 
 		graphics.setFont(getFont()); 
 		graphics.drawString(getText(), textX, textY); 
