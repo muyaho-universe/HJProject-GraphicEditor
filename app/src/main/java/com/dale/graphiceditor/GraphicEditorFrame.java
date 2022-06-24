@@ -85,8 +85,8 @@ public class GraphicEditorFrame extends JFrame{
 		JPanel toolsPanel =  new JPanel();
 				
 		mainPanel.setLayout(null);		
-//		additionalFunctionPanel.setLayout(null);
-		attributesPanel.setLayout(null);
+
+//		attributesPanel.setLayout(null);
 		selectShapePanel.setLayout(null);
 
 		toolsPanel.setLayout(null);
@@ -112,7 +112,7 @@ public class GraphicEditorFrame extends JFrame{
 		//END POINT
 		
 		//START POINT: setting selectShapePanel
-		selectShapePanel.setBounds(selectShapePanelX, selectShapePanelY, selectShapePanelWidth, selectShapePanelHeight);
+		
 		selectShapePanel.setBackground(Color.RED);
 		//END POINT
 		

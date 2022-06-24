@@ -1,5 +1,14 @@
 package com.dale.graphiceditor;
 
-public class HomeMenu {
+import javax.swing.JPanel;
+
+public class HomeMenu extends JPanel{
+	
+	HomeMenu(){
+		SelectShape selectShape = new SelectShape();
+		
+		
+		this.setLayout(null);
+	}
 
 }
