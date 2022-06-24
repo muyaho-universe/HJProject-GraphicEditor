@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
-import com.dale.graphiceditor.buttons.DragPoint;
+import com.dale.graphiceditor.buttons.*;
 
 import java.awt.event.*;
 
@@ -12,28 +12,51 @@ import java.awt.event.*;
 public class ResizablePanel extends JPanel {
 	
 	private Point dragLocation  = new Point();
-	private String[] locations = {"bottom", "right",  "angle"}; 
-	DragPoint[] points = new DragPoint[3];
+	private String[] locations = {"bottom", "right",  "angle"};
+	BottomDragButton bottomDragButton = new BottomDragButton("bottom");
+	AngleDragButton angleDragButton = new AngleDragButton("angle");
+	RightDragButton rightDragButton = new RightDragButton("right");
+	
 	DrawablePanel canvas = new DrawablePanel();
 	
 	public  ResizablePanel() {
-		canvas.setBounds(0, 0, this.getWidth()-5, this.getHeight()-5);
+		System.out.println("Made!");
+		this.add(angleDragButton);
+		this.add(bottomDragButton);
+		this.add(rightDragButton);
+		canvas.setOpaque(false);
+		canvas.setBounds(0, 0, this.getWidth()-40, this.getHeight()-40);
 		canvas.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		add(canvas);
+		this.setLayout(null);
+		this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		
-		for(int i = 0; i < 3; i ++) {
-			points[i] = new DragPoint(locations[i]);
-			this.add(points[i]);
-		}
-		
-//		setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-//		setPreferredSize(new Dimension(500, 500));
-		
-		addMouseMotionListener(new MouseMotionAdapter() {
+		this.addMouseMotionListener(new MouseMotionAdapter() {
 	        @Override
 	        public void mouseDragged(MouseEvent e) {
-	            if (drag) {
+	        	// Buttom Drag
+	            if (bottomDragButton.isDragged()) {
 	                if (dragLocation.getX()> getWidth()-10 && dragLocation.getY()>getHeight()-10) {
+	                    System.err.println("in");
+	                    setSize((int)(getWidth()+(e.getPoint().getX()-dragLocation.getX())),
+	                            (int)(getHeight()+(e.getPoint().getY()-dragLocation.getY())));
+	                    dragLocation = e.getPoint();
+	                }
+	            }
+	            
+	            // Angle Drag
+	            if(angleDragButton.isDragged()) {
+	            	if (dragLocation.getX()> getWidth()-10 && dragLocation.getY()>getHeight()-10) {
+	                    System.err.println("in");
+	                    setSize((int)(getWidth()+(e.getPoint().getX()-dragLocation.getX())),
+	                            (int)(getHeight()+(e.getPoint().getY()-dragLocation.getY())));
+	                    dragLocation = e.getPoint();
+	                }
+	            }
+	            
+	            // Right Drag
+	            if(rightDragButton.isDragged()) {
+	            	if (dragLocation.getX()> getWidth()-10 && dragLocation.getY()>getHeight()-10) {
 	                    System.err.println("in");
 	                    setSize((int)(getWidth()+(e.getPoint().getX()-dragLocation.getX())),
 	                            (int)(getHeight()+(e.getPoint().getY()-dragLocation.getY())));
@@ -42,5 +65,8 @@ public class ResizablePanel extends JPanel {
 	            }
 	        }
 		});
+		
+		this.setOpaque(false);
+		
 	}
 }

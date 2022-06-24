@@ -48,7 +48,7 @@ public class GraphicEditorFrame extends JFrame{
 	
 	public static void main(String[] args) {
 		GraphicEditorFrame mainFrame = new GraphicEditorFrame();
-		mainFrame.run(mainFrame);
+		mainFrame.run();
 	}
 	
 	GraphicEditorFrame(){
@@ -76,7 +76,7 @@ public class GraphicEditorFrame extends JFrame{
 		System.out.println("ÇØ»óµµ : " + resolution.width + " x " + resolution.height);
 	}
 	
-	private void run(GraphicEditorFrame mainFrame) {
+	private void run() {
 		 
 		JPanel additionalFunctionPanel =  new JPanel();
 		JPanel attributesPanel =  new JPanel();
@@ -128,21 +128,19 @@ public class GraphicEditorFrame extends JFrame{
 		drawablePanel.setBackground(Color.WHITE);
 		drawablePanel.setLayout(null);
 		drawablePanel.setMinimumSize(new Dimension(5, 5));
-		drawablePanel.setMaximumSize(new Dimension(monitorWidth, skectchAreaPanelHeight / 2));
-		
-		
+		drawablePanel.setMaximumSize(new Dimension(monitorWidth, skectchAreaPanelHeight / 2));	
 		skectchAreaPanel.add(drawablePanel);
 		//END POINT
 		
 		//START POINT: setting main frame
-		mainFrame.setSize(GraphicEditorFrame.monitorWidth, GraphicEditorFrame.monitorHeight*19/20);
-		mainFrame.setVisible(true);
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setResizable(false);
-		mainFrame.setLayout(null);
-		mainFrame.add(toolsPanel);
-		mainFrame.add(skectchAreaPanel);
-		mainFrame.add(additionalFunctionPanel);
+		this.setSize(GraphicEditorFrame.monitorWidth, GraphicEditorFrame.monitorHeight*19/20);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setResizable(false);
+		this.setLayout(null);
+		this.add(toolsPanel);
+		this.add(skectchAreaPanel);
+		this.add(additionalFunctionPanel);
 		//END POINT
 	}
 	

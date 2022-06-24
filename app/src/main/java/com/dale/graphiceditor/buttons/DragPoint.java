@@ -28,69 +28,47 @@ public class DragPoint extends JButton {
 	
     public DragPoint(String text) { 
     	super(text);
-    	if(text.equals("bottom")) {
-    		
-    		x = GraphicEditorFrame.drawablePanelWidth /2;
-        	y = GraphicEditorFrame.drawablePanelHeight;
-        	this.setBounds(x, y, 10, 10);
-        	
-        	this.addMouseListener(new MouseListener() {
-        		@Override
-        		public void mouseEntered(MouseEvent e) {
-        			hasMouse = true;
-//        			isDragged = true;
-//        			System.out.println("Entered " + " drawablePanel.getSize: " + drawablePanel.getSize());
-        		}
+    	    			
+		this.addMouseListener(new MouseListener() {
+    		@Override
+    		public void mouseEntered(MouseEvent e) {
+    			hasMouse = true;
+        		System.out.println("Entered " + text);
+    		}
 
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
 
-				@Override
-				public void mousePressed(MouseEvent e) {
-					// TODO Auto-generated method stub
-					if(hasMouse) {
-						isDragged = true;
-					}			
-//	 		        System.out.println("Pressed " + "currentMouseX: " + currentMouseX + " e.getY(): " + currentMouseY);
-				}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(hasMouse) {
+					isDragged = true;
+				}			
+	 		    System.out.println("Pressed " + text + " isDragged " + isDragged);
+			}
 
-				@Override
-				public void mouseReleased(MouseEvent e) {
-					// TODO Auto-generated method stub
-					isDragged = false;
-//					System.out.println("Released " + " drawablePanel.getSize: " + drawablePanel.getSize());
-				}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				isDragged = false;
+				System.out.println("Released " + text + " isDragged " + isDragged);
+			}
 
-				@Override
-				public void mouseExited(MouseEvent e) {
-					// TODO Auto-generated method stub
-					if(!isDragged) {
-						hasMouse = false;
-						System.out.println("Exits ");
-					}
-					
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(!isDragged) {
+					hasMouse = false;
+					System.out.println("Exits ");
 				}
-        	});
-        	
-        	System.out.println("Dragged: " + hasMouse + " newX " + newX + " newY " );
-        }
-    	
-    	if(text.equals("right")) {
-    		x = GraphicEditorFrame.drawablePanelWidth;
-        	y = GraphicEditorFrame.drawablePanelHeight / 2;
-        	this.setBounds(x, y, 10, 10);
-    	}
-    	
-    	if(text.equals("angle")) {
-    		x = GraphicEditorFrame.drawablePanelWidth;
-        	y = GraphicEditorFrame.drawablePanelHeight;
-        	this.setBounds(x, y, 10, 10);
-    	}
-    	
-    	decorate(); 
+			}
+    	});
+		this.setBackground(new Color(224, 224, 224));	
+    	this.decorate(); 
     } 
     
     public DragPoint(Action action) { 
@@ -105,9 +83,11 @@ public class DragPoint extends JButton {
     	super(text, icon); 
     	decorate(); 
     } 
+    
     protected void decorate() { 
-    	setBorderPainted(true); 
-    	setOpaque(false); 
+    	
+    	setBorderPainted(false); 
+    	setOpaque(false);
     }
     
     @Override 
@@ -131,7 +111,7 @@ public class DragPoint extends JButton {
 			graphics.setColor(c); 
 		} 
 		
-		graphics.fillRoundRect(0, 0, width, height, 10, 10);
+		graphics.fillRoundRect(0, 0, 10, 10, 10, 10);
 		
 		FontMetrics fontMetrics = graphics.getFontMetrics(); 
 		Rectangle stringBounds = fontMetrics.getStringBounds(this.getText(), graphics).getBounds(); 
@@ -145,4 +125,24 @@ public class DragPoint extends JButton {
 		graphics.dispose(); 
 	 	super.paintComponent(g); 
     }
+    
+    public void setX(int x) {
+		this.x =x;
+	}
+	
+	public int getX() {
+		return x;
+	}
+	
+	public void setY(int y) {
+		this.y =y;
+	}
+	
+	public int getY() {
+		return y;
+	}
+	
+	public boolean isDragged() {
+		return isDragged;
+	}
 }
