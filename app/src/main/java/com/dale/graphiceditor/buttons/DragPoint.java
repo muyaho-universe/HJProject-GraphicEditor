@@ -85,8 +85,9 @@ public class DragPoint extends JButton {
     } 
     
     protected void decorate() { 
-    	
-    	setBorderPainted(false); 
+//    	
+//    	this.setPreferredSize(new Dimension(256, 256));
+    	setBorderPainted(true);
     	setOpaque(false);
     }
     
@@ -94,7 +95,7 @@ public class DragPoint extends JButton {
     protected void paintComponent(Graphics g) {
 		Color c=new Color(255,247,242); //배경색 결정
 		Color o=new Color(247,99,12); //글자색 결정
-		
+//		setMargin(new Insets(50, 50, 50, 50));
 		int width = getWidth(); 
 		int height = getHeight(); 
 		
@@ -111,7 +112,7 @@ public class DragPoint extends JButton {
 			graphics.setColor(c); 
 		} 
 		
-		graphics.fillRoundRect(0, 0, 10, 10, 10, 10);
+		graphics.fillRoundRect(0, 0, width, height, 100, 100);
 		
 		FontMetrics fontMetrics = graphics.getFontMetrics(); 
 		Rectangle stringBounds = fontMetrics.getStringBounds(this.getText(), graphics).getBounds(); 

@@ -1,7 +1,7 @@
 package com.dale.graphiceditor;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
-public class SkectchArea extends JFrame {
+public class SkectchArea extends JPanel {
 
 }

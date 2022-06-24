@@ -38,20 +38,21 @@ public class ResizablePanel extends JPanel {
 	        public void mouseDragged(MouseEvent e) {
 	        	// Buttom Drag
 	            if (bottomDragButton.isDragged()) {
-	                if (dragLocation.getX()> getWidth()-10 && dragLocation.getY()>getHeight()-10) {
-	                    System.err.println("in");
-	                    setSize((int)(getWidth()+(e.getPoint().getX()-dragLocation.getX())),
-	                            (int)(getHeight()+(e.getPoint().getY()-dragLocation.getY())));
-	                    dragLocation = e.getPoint();
-	                }
+                    ResizablePanel.this.setSize((int)(getWidth()+(e.getPoint().getX()-dragLocation.getX())),
+                            (int)(getHeight()+(e.getPoint().getY()-dragLocation.getY())));
+                    ResizablePanel.this.drawablePanel.setSize(10, 10);
+                    dragLocation = e.getPoint();
+                    
+	                
 	            }
 	            
 	            // Angle Drag
 	            if(angleDragButton.isDragged()) {
 	            	if (dragLocation.getX()> getWidth()-10 && dragLocation.getY()>getHeight()-10) {
 	                    System.err.println("in");
-	                    setSize((int)(getWidth()+(e.getPoint().getX()-dragLocation.getX())),
+	                    ResizablePanel.this.setSize((int)(getWidth()+(e.getPoint().getX()-dragLocation.getX())),
 	                            (int)(getHeight()+(e.getPoint().getY()-dragLocation.getY())));
+	                    ResizablePanel.this.drawablePanel.setSize(10, 10);
 	                    dragLocation = e.getPoint();
 	                }
 	            }
@@ -60,17 +61,20 @@ public class ResizablePanel extends JPanel {
 	            if(rightDragButton.isDragged()) {
 	            	if (dragLocation.getX()> getWidth()-10 && dragLocation.getY()>getHeight()-10) {
 	                    System.err.println("in");
-	                    setSize(, (int)(getHeight()+(e.getPoint().getY()-dragLocation.getY())));
+	                    ResizablePanel.this.setSize((int)(getWidth()+(e.getPoint().getX()-dragLocation.getX())), (int)(getHeight()+(e.getPoint().getY()-dragLocation.getY())));
+	                    ResizablePanel.this.drawablePanel.setSize(10, 10);
 	                    dragLocation = e.getPoint();
 	                }
 	            }
 	        }
+
+			
 		});
 		
 		this.setOpaque(false);
-		//START POINT: setting drawablePanel
-				
+		//START POINT: setting drawablePanel		
 		this.add(drawablePanel);
 		//END POINT
+		
 	}
 }
