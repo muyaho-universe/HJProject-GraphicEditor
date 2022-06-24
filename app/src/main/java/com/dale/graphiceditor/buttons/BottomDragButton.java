@@ -14,7 +14,7 @@ public class BottomDragButton extends DragPoint{
 		super(name);
 		super.setX(GraphicEditorFrame.drawablePanelWidth/2);
 		super.setY(GraphicEditorFrame.drawablePanelHeight);
-    	this.setBounds(super.getX()- 15, super.getY() - 5, 10, 10);
+    	this.setBounds(super.getX(), super.getY(), 40, 40);
 	}
 
 }

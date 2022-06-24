@@ -1,5 +1,9 @@
 package com.dale.graphiceditor.menubar;
 
-public class MenuBar {
+import javax.swing.*;
 
+public class MenuBar extends JMenuBar {
+	public MenuBar() {
+		
+	}
 }

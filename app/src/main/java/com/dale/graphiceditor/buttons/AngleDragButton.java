@@ -12,6 +12,6 @@ public class AngleDragButton extends DragPoint {
 		super(name);
 		super.setX(GraphicEditorFrame.drawablePanelWidth);
 		super.setY(GraphicEditorFrame.drawablePanelHeight);
-    	this.setBounds(super.getX() - 15, super.getY()- 15, 10, 10);
+    	this.setBounds(super.getX(), super.getY(), 40, 40);
 	}
 }

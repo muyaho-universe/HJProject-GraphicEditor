@@ -32,6 +32,7 @@ public class DragPoint extends JButton {
 		this.addMouseListener(new MouseListener() {
     		@Override
     		public void mouseEntered(MouseEvent e) {
+    			setCursor(new Cursor(Cursor.HAND_CURSOR));
     			hasMouse = true;
         		System.out.println("Entered " + text);
     		}
@@ -85,8 +86,6 @@ public class DragPoint extends JButton {
     } 
     
     protected void decorate() { 
-//    	
-//    	this.setPreferredSize(new Dimension(256, 256));
     	setBorderPainted(true);
     	setOpaque(false);
     }

@@ -1,5 +1,22 @@
 package com.dale.graphiceditor;
 
-public class AdditionalFunctions {
+import java.awt.Color;
 
+import javax.swing.JPanel;
+
+import com.dale.graphiceditor.menubar.MenuBar;
+
+public class AdditionalFunctions extends JPanel {
+	public MenuBar menuBar;
+	AdditionalFunctions(){
+		setLayout(null);
+		setBackground(Color.BLACK);
+	}
+	
+	public void setSize() {
+		setBounds(0, 0, GraphicEditorFrame.additionalFunctionPanelWidth- 100, GraphicEditorFrame.additionalFunctionPanelHeight);
+	}
+	public void setMenuBar() {
+		menuBar = new MenuBar();
+	}
 }

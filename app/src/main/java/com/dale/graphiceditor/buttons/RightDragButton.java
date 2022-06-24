@@ -9,7 +9,7 @@ public class RightDragButton extends DragPoint {
 		super(name);
 		super.setX(GraphicEditorFrame.drawablePanelWidth);
 		super.setY(GraphicEditorFrame.drawablePanelHeight / 2);
-    	this.setBounds(super.getX() - 5, super.getY() - 15, 10, 10);
+    	this.setBounds(super.getX(), super.getY(), 40, 40);
 	}
 	
 	
