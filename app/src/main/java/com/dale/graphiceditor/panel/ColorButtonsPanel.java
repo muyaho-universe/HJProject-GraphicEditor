@@ -1,5 +1,7 @@
 package com.dale.graphiceditor.panel;
 
-public class ColorButtonsPanel {
+import javax.swing.*;
+
+public class ColorButtonsPanel extends JPanel{
 
 }
