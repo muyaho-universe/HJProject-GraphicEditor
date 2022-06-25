@@ -7,7 +7,7 @@ import javax.swing.JButton;
 public class ColorSelectButtons extends JButton {
 	Color myColor;
 	int x, y;
-	ColorSelectButtons(int x, int y, int r, int g, int b){
+	public ColorSelectButtons(int x, int y, int r, int g, int b){
 		myColor = new Color(r, g, b);
 		
 		this.x = x;

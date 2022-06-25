@@ -16,10 +16,10 @@ public class GraphicEditorFrame extends JFrame{
 	static public int monitorHeight;
 	static int additionalFunctionPanelWidth; // = monitorWidth;
 	static int additionalFunctionPanelHeight; // = monitorHeight * 7 /100;
-	static int attributesPanelWidth; // = monitorWidth * 32 / 100;
-	static int attributesPanelHeight; // = monitorHeight *15 / 100;
-	static int attributesPanelX; // = monitorWidth * 49 / 100
-	static int attributesPanelY = 0; // = 0;
+	public static int attributesPanelWidth; // = monitorWidth * 32 / 100;
+	public static int attributesPanelHeight; // = monitorHeight *15 / 100;
+	public static int attributesPanelX; // = monitorWidth * 49 / 100
+	public static int attributesPanelY = 0; // = 0;
 	static int selectShapePanelWidth; // = monitorWidth * 4 / 10, 
 	static int selectShapePanelHeight; // = monitorHeight*15/100
 	static int selectShapePanelX;  // = monitorWidth * 27/ 100

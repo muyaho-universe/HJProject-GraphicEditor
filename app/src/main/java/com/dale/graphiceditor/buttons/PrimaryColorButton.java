@@ -12,6 +12,7 @@ public class PrimaryColorButton extends JButton {
 	
 	public void setColor(int r, int g, int b) {
 		primaryRGBColor = new Color(r, g, b);
+		this.setBackground();
 	}
 	
 	public Color getColor() {
@@ -24,5 +25,6 @@ public class PrimaryColorButton extends JButton {
 	
 	public void setSize() {
 		this.setBounds(2, 2, 60, 115);
+		this.setBackground();
 	}
 }
