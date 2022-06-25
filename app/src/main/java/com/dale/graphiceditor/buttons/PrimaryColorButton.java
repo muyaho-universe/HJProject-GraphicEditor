@@ -1,13 +1,19 @@
 package com.dale.graphiceditor.buttons;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class PrimaryColorButton extends JButton {
+	private JPanel primaryColorPanel;
+	private JTextField name;
 	public Color primaryRGBColor = new Color(0, 0, 0);
 	public PrimaryColorButton() {
-		super("»ö\n1");
+		
+		this.setLayout(new BorderLayout());
 	}
 	
 	public void setColor(int r, int g, int b) {
@@ -26,5 +32,16 @@ public class PrimaryColorButton extends JButton {
 	public void setSize() {
 		this.setBounds(2, 2, 60, 115);
 //		this.setBackground();
+	}
+	
+	public void createPrimary() {
+		primaryColorPanel = new JPanel();
+		name = new JTextField();
+		name.setText("»ö\n1");
+		name.setEditable(false);
+		name.setEnabled(false);
+		primaryColorPanel.setBackground(primaryRGBColor);
+		this.add(primaryColorPanel, BorderLayout.CENTER);
+		this.add(name, BorderLayout.SOUTH);
 	}
 }

@@ -15,13 +15,15 @@ public class ColorEditPanel extends JPanel {
 	ColorChooserCallButton colorChooserCall;
 
 	public void createPanel() {
-		ImageIcon img = new ImageIcon("./assets/color_picker.png");
-		colorChooserCall = new ColorChooserCallButton("색 편집", img);
+//		ImageIcon img = new ImageIcon("./assets/color_picker.png");
+		colorChooserCall = new ColorChooserCallButton("색 편집");
 		colorChooserCall.createButton();
+		colorChooserCall.setSize();
+		this.setLayout(null);
 		this.add(colorChooserCall);
 	}
 	public void setSize() {
-		this.setBounds(540, 72, 129, GraphicEditorFrame.attributesPanelHeight);
+		this.setBounds(400, 0, 129, GraphicEditorFrame.attributesPanelHeight);
 	}
 	
 }

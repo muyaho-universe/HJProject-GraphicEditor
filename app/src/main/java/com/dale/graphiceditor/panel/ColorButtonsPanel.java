@@ -20,13 +20,15 @@ public class ColorButtonsPanel extends JPanel{
 		colorSelectPanel = new ColorSelectPanel();
 		
 		primaryColor.setSize();
+		primaryColor.createPrimary();
 		secondaryColor.setSize();
+		secondaryColor.createSecondary();
 		colorSelectPanel.setSize();
 		colorSelectPanel.createPanel();
 		
 		this.add(primaryColor);
 		this.add(secondaryColor);
-		this.add(colorSelectPanel);	
+//		this.add(colorSelectPanel);	
 	}
 	public void setSize() {
 		this.setBounds(0, 0,

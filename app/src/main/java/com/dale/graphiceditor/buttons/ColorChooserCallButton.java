@@ -13,15 +13,16 @@ import javax.swing.*;
 public class ColorChooserCallButton extends JButton {
 	private Color chooseColor = new Color(0, 0, 0);
 	
-	public ColorChooserCallButton(String text,ImageIcon img) {
-		super(text, img);
+	public ColorChooserCallButton(String text) {
+		super(text);
 	}
+	
 	public void createButton() {
 		this.addActionListener(new MenuActionListener());
 		
 		
-		this.setSize(54, 104);
-		this.setBounds(0, 0, 60, 115);
+//		this.setSize(100, 100);
+		
 	}
 	class MenuActionListener implements ActionListener {
 		JColorChooser chooser = new JColorChooser();
@@ -37,5 +38,8 @@ public class ColorChooserCallButton extends JButton {
 				}
 			}
 		}
+	}
+	public void setSize() {
+		this.setBounds(0, 0, 115, 115);
 	}
 }

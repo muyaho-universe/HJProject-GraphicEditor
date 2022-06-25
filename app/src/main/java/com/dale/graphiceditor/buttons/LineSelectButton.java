@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class LineSelectButton extends JButton{
 	public LineSelectButton() {
-		super("À¯¾ßÈ£");
+		super("/");
 	}
 	
 	public void setSize() {

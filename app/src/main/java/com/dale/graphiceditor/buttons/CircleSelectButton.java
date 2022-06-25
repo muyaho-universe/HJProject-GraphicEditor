@@ -6,7 +6,7 @@ import javax.swing.JButton;
 
 public class CircleSelectButton extends JButton {
 	public CircleSelectButton() {
-		super("¾ßÈ£");
+		super("¡Û");
 	}
 	
 	public void setSize() {

@@ -28,6 +28,7 @@ public class AttributeArea extends JPanel {
 		
 		colorEditPanel.createPanel();
 		colorEditPanel.setSize();
+		colorEditPanel.setBackground(Color.DARK_GRAY);
 		
 		this.add(colorSelectPanel);
 		this.add(colorButtonsPanel);

@@ -6,7 +6,7 @@ import javax.swing.JButton;
 
 public class PolylineSelectButton extends JButton {
 	public PolylineSelectButton() {
-		super("ÀÌ¾ßÈ£");
+		super("Z");
 	}
 	public void setSize() {
 //		this.setPreferredSize(new Dimension(200,900));

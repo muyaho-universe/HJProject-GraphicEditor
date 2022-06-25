@@ -93,6 +93,7 @@ public class GraphicEditorFrame extends JFrame{
 		
 		mainPanel.setBounds(0, 0, monitorWidth, monitorHeight);
 		mainPanel.setBackground(new Color(125, 0, 0));
+		
 		//START POINT: setting additionalFunctionPanel
 		additionalFunctionPanel.setSize();
 		additionalFunctionPanel.setMenuBar();
@@ -104,9 +105,7 @@ public class GraphicEditorFrame extends JFrame{
 		//END POINT
 		
 		//START POINT: setting attributesPanel
-//		attributesPanel.createAttributeArea();
-//		attributesPanel.setSize();
-//		attributesPanel.setBounds(attributesPanelX, attributesPanelY, attributesPanelWidth,attributesPanelHeight);
+
 		//END POINT
 		
 		//START POINT: setting selectShapePanel
