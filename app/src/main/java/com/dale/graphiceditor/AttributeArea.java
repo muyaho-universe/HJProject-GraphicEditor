@@ -1,10 +1,17 @@
 package com.dale.graphiceditor;
 
-public class AttributeArea extends HomeMenu {
+import java.awt.Color;
 
+import javax.swing.JPanel;
+
+public class AttributeArea extends JPanel {
+	AttributeArea(){
+		this.setLayout(null);
+		
+	}
 	
 	public void setSize() {
-		setBounds(GraphicEditorFrame.attributesPanelX, GraphicEditorFrame.attributesPanelY,
+		this.setBounds(GraphicEditorFrame.attributesPanelX, GraphicEditorFrame.attributesPanelY,
 				GraphicEditorFrame.attributesPanelWidth, GraphicEditorFrame.attributesPanelHeight);
 	}
 }

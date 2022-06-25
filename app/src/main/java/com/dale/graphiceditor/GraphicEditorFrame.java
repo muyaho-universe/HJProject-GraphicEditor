@@ -61,10 +61,10 @@ public class GraphicEditorFrame extends JFrame{
 		additionalFunctionPanelHeight = monitorHeight * 7 /100;
 		attributesPanelWidth = monitorWidth * 32 / 100;
 		attributesPanelHeight = monitorHeight *15 / 100;
-		attributesPanelX = monitorWidth * 49 / 100;
-		selectShapePanelWidth = monitorWidth * 4 / 10; 
+		attributesPanelX = monitorWidth * 40/ 100;
+		selectShapePanelWidth = monitorWidth * 29 / 100; 
 		selectShapePanelHeight = monitorHeight*15/100 ;
-		selectShapePanelX = monitorWidth * 27/ 100;
+		selectShapePanelX = monitorWidth * 21/ 100;
 		skectchAreaPanelWidth = monitorWidth;
 		skectchAreaPanelHeight = monitorHeight -monitorHeight * 22 /100;
 		skectchAreaPanelY = monitorHeight * 22 /100;
@@ -82,7 +82,7 @@ public class GraphicEditorFrame extends JFrame{
 		AdditionalFunctions additionalFunctionPanel =  new AdditionalFunctions();
 		JPanel attributesPanel =  new JPanel();
 		JPanel selectShapePanel = new JPanel();
-		JPanel toolsPanel =  new JPanel();
+		HomeMenu toolsPanel =  new HomeMenu();
 				
 		mainPanel.setLayout(null);		
 
@@ -99,21 +99,17 @@ public class GraphicEditorFrame extends JFrame{
 		//END POINT
 		
 		//START POINT: setting toolsPanel
-		toolsPanel.setBounds(toolsPanelX, toolsPanelY, toolsPanelWidth,toolsPanelHeight);
-		
-		toolsPanel.setBackground(Color.BLUE);
-		toolsPanel.add(attributesPanel);
-		toolsPanel.add(selectShapePanel);
+
+		toolsPanel.createHomeMenu();
 		//END POINT
 		
 		//START POINT: setting attributesPanel
-		attributesPanel.setBounds(attributesPanelX, attributesPanelY, attributesPanelWidth,attributesPanelHeight);
-		attributesPanel.setBackground(Color.GREEN);
+//		attributesPanel.setBounds(attributesPanelX, attributesPanelY, attributesPanelWidth,attributesPanelHeight);
 		//END POINT
 		
 		//START POINT: setting selectShapePanel
 		
-		selectShapePanel.setBackground(Color.RED);
+
 		//END POINT
 		
 		//START POINT: setting skectchAreaPanel
