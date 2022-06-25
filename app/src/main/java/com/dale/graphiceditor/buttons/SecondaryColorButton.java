@@ -6,8 +6,9 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 
-public class SecondaryColorButton extends JButton {
+public class SecondaryColorButton extends JToggleButton {
 	private JPanel secondaryColorPanel;
 	private JTextField name;
 	public Color secondaryRGBColor = new Color(255, 255, 255);
@@ -40,6 +41,7 @@ public class SecondaryColorButton extends JButton {
 		secondaryColorPanel.setBackground(secondaryRGBColor);
 		this.add(secondaryColorPanel, BorderLayout.CENTER);
 		this.add(name, BorderLayout.SOUTH);
-		
+		this.addActionListener(actionListener);
 	}
+	
 }

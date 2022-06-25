@@ -44,8 +44,6 @@ public class GraphicEditorFrame extends JFrame{
     
 	MyMouse myMouse = new MyMouse();
 	
-	
-	
 	public static void main(String[] args) {
 		GraphicEditorFrame mainFrame = new GraphicEditorFrame();
 		mainFrame.run();

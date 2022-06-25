@@ -6,8 +6,9 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 
-public class PrimaryColorButton extends JButton {
+public class PrimaryColorButton extends JToggleButton {
 	private JPanel primaryColorPanel;
 	private JTextField name;
 	public Color primaryRGBColor = new Color(0, 0, 0);

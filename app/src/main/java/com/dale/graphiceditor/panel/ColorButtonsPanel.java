@@ -1,5 +1,7 @@
 package com.dale.graphiceditor.panel;
 
+import java.awt.Container;
+
 import javax.swing.*;
 
 import com.dale.graphiceditor.GraphicEditorFrame;
@@ -9,7 +11,8 @@ public class ColorButtonsPanel extends JPanel{
 	PrimaryColorButton primaryColor;
 	SecondaryColorButton secondaryColor;
 	ColorSelectPanel colorSelectPanel;
-	
+	ButtonGroup buttonGroup;
+	Container container;
 	public ColorButtonsPanel(){
 		this.setLayout(null);
 	}
@@ -18,6 +21,8 @@ public class ColorButtonsPanel extends JPanel{
 		primaryColor = new PrimaryColorButton();
 		secondaryColor = new SecondaryColorButton();
 		colorSelectPanel = new ColorSelectPanel();
+		buttonGroup = new ButtonGroup();
+		container = new Container();
 		
 		primaryColor.setSize();
 		primaryColor.createPrimary();
@@ -25,9 +30,13 @@ public class ColorButtonsPanel extends JPanel{
 		secondaryColor.createSecondary();
 		colorSelectPanel.setSize();
 		colorSelectPanel.createPanel();
+		buttonGroup.add(primaryColor);
+		buttonGroup.add(secondaryColor);
+		container.add(primaryColor);
+		container.add(secondaryColor);
+		container.setBounds(0, 0, 200, 200);
+		this.add(container);
 		
-		this.add(primaryColor);
-		this.add(secondaryColor);
 //		this.add(colorSelectPanel);	
 	}
 	public void setSize() {
