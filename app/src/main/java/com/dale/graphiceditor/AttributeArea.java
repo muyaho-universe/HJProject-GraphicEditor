@@ -10,6 +10,7 @@ public class AttributeArea extends JPanel {
 	ColorButtonsPanel colorButtonsPanel;
 	ColorSelectPanel colorSelectPanel;
 	ColorEditPanel colorEditPanel;
+		
 	AttributeArea(){
 		this.setLayout(null);
 	}
@@ -18,8 +19,7 @@ public class AttributeArea extends JPanel {
 		colorButtonsPanel = new ColorButtonsPanel();
 		colorSelectPanel = new ColorSelectPanel();
 		colorEditPanel = new ColorEditPanel();
-		
-		
+				
 		colorButtonsPanel.setComponents();
 		colorButtonsPanel.setSize();
 		
@@ -29,6 +29,7 @@ public class AttributeArea extends JPanel {
 		colorEditPanel.createPanel();
 		colorEditPanel.setSize();
 		colorEditPanel.setBackground(Color.DARK_GRAY);
+		
 		
 		this.add(colorSelectPanel);
 		this.add(colorButtonsPanel);

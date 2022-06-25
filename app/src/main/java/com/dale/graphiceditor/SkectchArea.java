@@ -24,10 +24,16 @@ public class SkectchArea extends JPanel {
 		
 		System.out.println(GraphicEditorFrame.skectchAreaPanelX+" "+ GraphicEditorFrame.skectchAreaPanelY+" "+ 
 				GraphicEditorFrame.skectchAreaPanelWidth+" "+ GraphicEditorFrame.skectchAreaPanelHeight);
+		skectchAreaPanel.makeItResizable();
 		skectchAreaPanel.add(bottomDragButton);
 		skectchAreaPanel.add(angleDragButton);
 		skectchAreaPanel.add(rightDragButton);
+		drawablePanel.setSize();
+		skectchAreaPanel.setSize();
 		skectchAreaPanel.add(drawablePanel);
+		
+		
+		skectchAreaPanel.setBackground(Color.BLUE);
 		this.add(skectchAreaPanel);
 		this.setBackground(Color.CYAN);
 		
