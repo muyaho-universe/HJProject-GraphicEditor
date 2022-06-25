@@ -13,7 +13,8 @@ public class HomeMenu extends JPanel{
 		
 		selectShape.setSize();
 		selectShape.setComponents();
-		selectShape.setBackground(Color.RED);
+		selectShape.createSelectShape();
+//		selectShape.setBackground(Color.RED);
 		
 		attribute.setBackground(Color.GREEN);
 		attribute.createAttributeArea();	

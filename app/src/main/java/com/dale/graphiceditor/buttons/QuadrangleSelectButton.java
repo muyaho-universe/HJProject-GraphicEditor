@@ -4,11 +4,11 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
-public class QuadrangleSelectButton extends JButton {
+public class QuadrangleSelectButton extends JToggleButton {
 	public QuadrangleSelectButton() {
 		super("бр");
 	}
 	public void setSize() {
-//		this.setPreferredSize(new Dimension(200,900));
+		this.setBounds(200, 0, 200, 56);
 	}
 }

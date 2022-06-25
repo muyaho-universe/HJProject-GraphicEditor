@@ -4,12 +4,12 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
-public class LineSelectButton extends JButton{
+public class LineSelectButton extends JToggleButton{
 	public LineSelectButton() {
 		super("/");
 	}
 	
 	public void setSize() {
-//		this.setPreferredSize(new Dimension(200,900));
+		this.setBounds(0, 0, 200, 56);
 	}
 }

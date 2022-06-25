@@ -7,10 +7,16 @@ import javax.swing.*;
 import com.dale.graphiceditor.buttons.*;
 
 public class SelectShape extends JPanel {
+	Container container;
+	ButtonGroup buttonGroup;
+	CircleSelectButton circleSelect;
+	QuadrangleSelectButton quadrangleSelect;
+	LineSelectButton lineSelect;
+	PolylineSelectButton polyLine;
 	
 	public void createSelectShape() {
 		GridLayout layout = new GridLayout(2, 2);
-		this.setLayout(layout);
+		this.setLayout(null);
 	}
 	
 	public void setSize() {
@@ -19,10 +25,13 @@ public class SelectShape extends JPanel {
 	}
 	
 	public void setComponents() {
-		CircleSelectButton circleSelect = new CircleSelectButton();
-		QuadrangleSelectButton quadrangleSelect = new QuadrangleSelectButton();
-		LineSelectButton lineSelect = new LineSelectButton();
-		PolylineSelectButton polyLine = new PolylineSelectButton();
+		buttonGroup = new ButtonGroup();
+		container = new Container();
+		
+		circleSelect = new CircleSelectButton();
+		quadrangleSelect = new QuadrangleSelectButton();
+		lineSelect = new LineSelectButton();
+		polyLine = new PolylineSelectButton();
 		
 		circleSelect.setBackground(new Color(123, 123, 132));
 		quadrangleSelect.setBackground(new Color(0, 123, 132));
@@ -34,9 +43,17 @@ public class SelectShape extends JPanel {
 		lineSelect.setSize();
 		polyLine.setSize();
 		
-		this.add(circleSelect);
-		this.add(quadrangleSelect);
-		this.add(lineSelect);
-		this.add(polyLine);
+		buttonGroup.add(circleSelect);
+		buttonGroup.add(quadrangleSelect);
+		buttonGroup.add(lineSelect);
+		buttonGroup.add(polyLine);
+		
+		container.add(polyLine);
+		container.add(circleSelect);
+		container.add(quadrangleSelect);
+		container.add(lineSelect);
+		container.setBounds(0, 0, 560, 163);
+		
+		this.add(container);
 	}
 }

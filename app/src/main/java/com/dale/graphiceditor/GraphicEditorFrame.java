@@ -123,8 +123,8 @@ public class GraphicEditorFrame extends JFrame{
 		
 //		mainPanel.add(attributesPanel);
 		mainPanel.add(toolsPanel);
-		mainPanel.add(additionalFunctionPanel);
-		mainPanel.add(skectchArea);
+//		mainPanel.add(additionalFunctionPanel);
+//		mainPanel.add(skectchArea);
 		
 		this.setJMenuBar(additionalFunctionPanel.menuBar);
 		this.add(mainPanel);
