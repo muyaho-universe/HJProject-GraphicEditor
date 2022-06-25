@@ -17,8 +17,8 @@ public class PrimaryColorButton extends JToggleButton {
 	private JPanel primaryColorPanel;
 	private JTextField name;
 	public Color primaryRGBColor = new Color(0, 0, 0);
-	public PrimaryColorButton() {
-		
+	public PrimaryColorButton(String text, boolean selected) {
+		super(text, selected);
 		this.setLayout(new BorderLayout());
 	}
 	

@@ -12,8 +12,8 @@ import com.dale.graphiceditor.mouse.MyMouse;
 
 public class LineSelectButton extends JToggleButton{
 	
-	public LineSelectButton() {
-		super("/");
+	public LineSelectButton(String name, boolean selected) {
+		super("/", selected);
 		Font f = new Font("", Font.BOLD, 30);
 		this.setFont(f);
 	}

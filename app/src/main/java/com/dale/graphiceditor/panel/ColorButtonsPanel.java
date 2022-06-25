@@ -18,7 +18,7 @@ public class ColorButtonsPanel extends JPanel{
 	}
 	
 	public void setComponents() {
-		primaryColor = new PrimaryColorButton();
+		primaryColor = new PrimaryColorButton("»ö1", true);
 		secondaryColor = new SecondaryColorButton();
 		colorSelectPanel = new ColorSelectPanel();
 		buttonGroup = new ButtonGroup();

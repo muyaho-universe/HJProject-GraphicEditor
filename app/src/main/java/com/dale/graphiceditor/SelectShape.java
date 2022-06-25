@@ -30,7 +30,7 @@ public class SelectShape extends JPanel {
 		
 		circleSelect = new CircleSelectButton();
 		quadrangleSelect = new QuadrangleSelectButton();
-		lineSelect = new LineSelectButton();
+		lineSelect = new LineSelectButton("/", true);
 		polyLine = new PolylineSelectButton();
 		
 		circleSelect.setBackground(new Color(123, 123, 132));
