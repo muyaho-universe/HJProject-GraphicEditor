@@ -2,11 +2,16 @@ package com.dale.graphiceditor.buttons;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+
+import com.dale.graphiceditor.buttons.SecondaryColorButton.SecondaryColor;
+import com.dale.graphiceditor.mouse.MyMouse;
 
 public class PrimaryColorButton extends JToggleButton {
 	private JPanel primaryColorPanel;
@@ -44,5 +49,14 @@ public class PrimaryColorButton extends JToggleButton {
 		primaryColorPanel.setBackground(primaryRGBColor);
 		this.add(primaryColorPanel, BorderLayout.CENTER);
 		this.add(name, BorderLayout.SOUTH);
+		this.addActionListener(new SecondaryColor());
+	}	
+		
+	class SecondaryColor implements ActionListener {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			MyMouse.currentColor = primaryRGBColor;
+		}
 	}
 }
