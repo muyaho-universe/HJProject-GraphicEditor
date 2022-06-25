@@ -22,13 +22,14 @@ public class ColorButtonsPanel extends JPanel{
 		primaryColor.setSize();
 		secondaryColor.setSize();
 		colorSelectPanel.setSize();
+		colorSelectPanel.createPanel();
 		
 		this.add(primaryColor);
 		this.add(secondaryColor);
 		this.add(colorSelectPanel);	
 	}
 	public void setSize() {
-		this.setBounds(GraphicEditorFrame.attributesPanelX + 80, GraphicEditorFrame.attributesPanelY,
-				GraphicEditorFrame.attributesPanelWidth - 70, GraphicEditorFrame.attributesPanelHeight);
+		this.setBounds(0, 0,
+				120, 115);
 	}
 }

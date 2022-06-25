@@ -80,7 +80,7 @@ public class GraphicEditorFrame extends JFrame{
 	private void run() {
 		JPanel mainPanel = new JPanel();		
 		AdditionalFunctions additionalFunctionPanel =  new AdditionalFunctions();
-		JPanel attributesPanel =  new JPanel();
+//		AttributeArea attributesPanel =  new AttributeArea();
 		JPanel selectShapePanel = new JPanel();
 		HomeMenu toolsPanel =  new HomeMenu();
 				
@@ -104,6 +104,8 @@ public class GraphicEditorFrame extends JFrame{
 		//END POINT
 		
 		//START POINT: setting attributesPanel
+//		attributesPanel.createAttributeArea();
+//		attributesPanel.setSize();
 //		attributesPanel.setBounds(attributesPanelX, attributesPanelY, attributesPanelWidth,attributesPanelHeight);
 		//END POINT
 		
@@ -122,6 +124,7 @@ public class GraphicEditorFrame extends JFrame{
 				
 		//START POINT: setting main frame
 		
+//		mainPanel.add(attributesPanel);
 		mainPanel.add(toolsPanel);
 		mainPanel.add(additionalFunctionPanel);
 		mainPanel.add(skectchArea);

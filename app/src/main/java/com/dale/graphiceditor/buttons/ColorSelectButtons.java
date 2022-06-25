@@ -16,7 +16,7 @@ public class ColorSelectButtons extends JButton {
 	
 	public void creatButton() {
 		this.setBackground(myColor);
-		this.setBounds(x, y, 10, 10);
+		this.setBounds(x+25, y, 25, 25);
 	}
 	
 	public void setColor(int r, int g, int b) {

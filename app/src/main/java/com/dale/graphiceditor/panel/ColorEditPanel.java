@@ -8,16 +8,20 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.dale.graphiceditor.GraphicEditorFrame;
+import com.dale.graphiceditor.buttons.*;
 
 public class ColorEditPanel extends JPanel {
 	public boolean hasMouse = false;
-	JColorChooser colorChooser = new JColorChooser();
+	ColorChooserCallButton colorChooserCall;
 
 	public void createPanel() {
-		
+		ImageIcon img = new ImageIcon("./assets/color_picker.png");
+		colorChooserCall = new ColorChooserCallButton("»ö ÆíÁý", img);
+		colorChooserCall.createButton();
+		this.add(colorChooserCall);
 	}
 	public void setSize() {
-		this.setBounds(540, 0, 70, GraphicEditorFrame.attributesPanelHeight);
+		this.setBounds(540, 72, 129, GraphicEditorFrame.attributesPanelHeight);
 	}
 	
 }

@@ -14,8 +14,9 @@ public class HomeMenu extends JPanel{
 		selectShape.setSize();
 		selectShape.setComponents();
 		selectShape.setBackground(Color.RED);
-		attribute.setBackground(Color.GREEN);
 		
+		attribute.setBackground(Color.GREEN);
+		attribute.createAttributeArea();	
 		attribute.setSize();
 		this.setLayout(null);
 		this.add(selectShape);
@@ -25,6 +26,7 @@ public class HomeMenu extends JPanel{
 	public void createHomeMenu() {
 		this.setBounds(GraphicEditorFrame.toolsPanelX, GraphicEditorFrame.toolsPanelY, 
 				GraphicEditorFrame.toolsPanelWidth,GraphicEditorFrame.toolsPanelHeight);
+		System.out.println("1234: "+GraphicEditorFrame.toolsPanelWidth);
 	}
 
 }
