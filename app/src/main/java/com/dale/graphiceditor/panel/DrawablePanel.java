@@ -3,13 +3,16 @@ package com.dale.graphiceditor.panel;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.event.MouseInputAdapter;
 
 import com.dale.graphiceditor.GraphicEditorFrame;
 import com.dale.graphiceditor.SkectchArea;
 import com.dale.graphiceditor.buttons.DragPoint;
+import com.dale.graphiceditor.datapart.MyDatas;
 import com.dale.graphiceditor.mouse.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class DrawablePanel extends JPanel{
 	private boolean hasMouse = false;
@@ -17,125 +20,152 @@ public class DrawablePanel extends JPanel{
 	private ArrayList<Point> startVector = new ArrayList<Point>();
 	private ArrayList<Point> endVector = new ArrayList<Point>();
 	
+	private Point startPoint = null;
+	private Point endPoint = null;
+	
 	public DrawablePanel() {
 		this.setBackground(Color.WHITE);
 		this.setLayout(null);
 		this.setMinimumSize(new Dimension(5, 5));
 		this.setMaximumSize(new Dimension(GraphicEditorFrame.monitorWidth, GraphicEditorFrame.skectchAreaPanelHeight / 2));	
 		this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-		this.addMouseListener(new DrawInPanel());
+		this.addMouseListener(new MyMouseListener());
+//		this.addMouseMotionListener(null)
 	}
 	
 	public void setSize() {
 		this.setBounds(GraphicEditorFrame.drawablePanelX, GraphicEditorFrame.drawablePanelY, GraphicEditorFrame.drawablePanelWidth, GraphicEditorFrame.drawablePanelHeight);
 	}
 	
-	class DrawInPanel implements MouseListener, MouseMotionListener{
+	public class MyMouseListener extends MouseInputAdapter {
 		
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			if(hasMouse) {
-				isDrawing = true;
-				System.out.println("그리자~~" + MyMouse.currentColor);
-			}
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			isDrawing = false;
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			hasMouse = true;
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			hasMouse = false;
-		}
-
-		@Override
+		Graphics g = getGraphics();
+		Graphics2D g2 = (Graphics2D) g;
+		
 		public void mouseDragged(MouseEvent e) {
 			// TODO Auto-generated method stub
-			if(isDrawing) {
+			if(MyMouse.currentMode.equals("Line")) {
+				endPoint = e.getPoint();
+				repaint();
+			}
+			else if(MyMouse.currentMode.equals("Polyline")) {
+				MyDatas.curves.get(MyDatas.curves.size()-1).add(new Point(e.getX(), e.getY()));
+				repaint(0,0,getWidth(), getHeight());
 				
+			}
+			else if(MyMouse.currentMode.equals("Circle")) {
+				endPoint = e.getPoint();
+				repaint();
+			}
+			else if(MyMouse.currentMode.equals("Quadrangle")) {
+				endPoint = e.getPoint();
+				repaint();
 			}
 		}
 
-		@Override
 		public void mouseMoved(MouseEvent e) {
 			// TODO Auto-generated method stub
 			
 		}
 		
+		public void mousePressed(MouseEvent e){
+			if(MyMouse.currentMode.equals("Polyline")) {
+				var newCurve = new Vector<Point>();
+				newCurve.add(new Point(e.getX(), e.getY()));
+				MyDatas.curves.add(newCurve);
+//				curveStroke.add(SelectBar.tsize);
+//				curves.add(new Point(e.getX(), e.getY()));
+			}
+			else {
+				MyDatas.mode.add(MyMouse.currentMode);
+				MyDatas.stroke.add(MyMouse.currentStroke);
+				MyDatas.color.add(MyMouse.currentColor);
+				if(MyMouse.currentMode.equals("Line")) {
+					startPoint = e.getPoint();
+					MyDatas.startVector.add(e.getPoint()); // 클릭한부분을 시작점으로
+				}
+				else if(MyMouse.currentMode.equals("Circle")) {
+					startPoint = e.getPoint();
+					MyDatas.startVector.add(e.getPoint()); // 클릭한부분을 시작점으로
+				}
+				else if(MyMouse.currentMode.equals("Quadrangle")) {
+					startPoint = e.getPoint();
+					MyDatas.startVector.add(e.getPoint()); // 클릭한부분을 시작점으로
+				}
+			}
+		}
+		public void mouseReleased(MouseEvent e){
+			if(MyMouse.currentMode.equals("Line")) {
+				MyDatas.endVector.add(e.getPoint()); // 드래그 한부분을 종료점으로
+				endPoint = e.getPoint();
+				repaint(); // 다시그려라
+			}
+			else if(MyMouse.currentMode.equals("Circle")) {
+				MyDatas.endVector.add(e.getPoint()); // 드래그 한부분을 종료점으로
+				endPoint = e.getPoint();
+				repaint(); // 다시그려라
+			}
+			else if(MyMouse.currentMode.equals("Quadrangle")) {
+				MyDatas.endVector.add(e.getPoint()); // 드래그 한부분을 종료점으로
+				endPoint = e.getPoint();
+				repaint(); // 다시그려라
+			}
+//			for(int i = 0; i < stroke.size(); i++) {
+//				System.out.println(stroke.get(i));
+//			}
+		}
+		
 	}
+	
 	public void paintComponent(Graphics g){
-	    super.paintComponent(g); // 부모 페인트호출
-	    Graphics2D g2d = (Graphics2D) g.create();
-          
-	    g2d.setColor(MyMouse.currentColor); //Lines' Color is set here
-	    g2d.setStroke(new BasicStroke(MyMouse.currentStroke));
-	    
-	    if(MyMouse.currentMode.equals("Quadrangle")) {
-	         g2d.drawRect(Math.min(50,30), Math.min(30,400), Math.abs(50-30), Math.abs(30-400));
-	    }
-//	    else if(MyMouse.currentMode.equals("Line")) {
-//	       g2d.drawLine(sp.x, sp.y, ep.x, ep.y);
-//	    }
-//	    else if(MyMouse.currentMode.equals("Circle")) {
-//	       g2d.drawOval(Math.min(sp.x, ep.x), Math.min(sp.y, ep.y),Math.abs(sp.x- ep.x),Math.abs(sp.y - ep.y));
-//	    }
-	      
-//        else if(MyMouse.currentMode..equals("pen")) {
-//
-//        	if(index>=0) {
-//        		System.out.println("index는"+index);
-//        		for(int j=0; j<for_pen.get(index).size()-1; j++) {
-//	        		Point tmp_a =null;
-//	                Point tmp_b =null;
-//	                b = for_pen.get(index).get(j);
-//	                a = for_pen.get(index).get(j+1);
-//	               
-//	                g2d.drawLine(b.x,b.y,a.x,a.y);
-//        		}
-//        		index--;
-//        	}   
-//      }
-          
-          
-	}
-        
-        
-        //마우스로 클릭하면서 연속적으로 그려지는 도형
-//        if(startP != null) {
-//           g2d.setColor(ColorChooser.color);
-//           g2d.setStroke(new BasicStroke(Button_stroke.stroke));
-//           //라인그리기
-//           if(sl==true) {
-//              g2d.drawLine(startP.x, startP.y, endP.x, endP.y);
-//           }
-//           //사각형 그리기
-//           else if(ss==true) {
-//              g2d.drawRect(Math.min(startP.x,endP.x), Math.min(startP.y,endP.y), Math.abs(startP.x-endP.x), Math.abs(startP.y-endP.y));//그리다
-//           }
-//           //원 그리기
-//           else if(sc==true) {
-//              
-//              g2d.drawOval(Math.min(startP.x,endP.x), Math.min(startP.y,endP.y), Math.abs(startP.x-endP.x), Math.abs(startP.y-endP.y));//그리다
-//        
-//           }
-//        }
-     
+		super.paintComponent(g); // 부모 페인트호출
+		Graphics2D g2 = (Graphics2D)g;
+		super.paintComponent(g2);
+		
+		
+		for(int i = 0; i < MyDatas.curves.size(); i++) {
+			Point previousPoint2 = MyDatas.curves.get(i).get(0);
+			for(int j = 0; j < MyDatas.curves.get(i).size(); j++) {
+				g.drawLine(previousPoint2.x, previousPoint2.y, MyDatas.curves.get(i).get(j).x, MyDatas.curves.get(i).get(j).y);
+				previousPoint2 = MyDatas.curves.get(i).get(j);
+			}
+		}
+
+		
+		if(MyDatas.startVector.size() != 0){
+			for(int i=0;i<MyDatas.endVector.size();i++){ //벡터크기만큼
+				Point sp = MyDatas.startVector.get(i); // 벡터값을꺼내다
+				Point ep = MyDatas.endVector.get(i);	
+				g2.setStroke(new BasicStroke(MyDatas.stroke.get(i),BasicStroke.CAP_ROUND, 0));
+				g2.setColor(MyDatas.color.get(i));
+				if(MyDatas.mode.get(i).equals("Line")) {
+					g.drawLine(sp.x, sp.y, ep.x, ep.y);// draw line
+				}
+					
+				else if((MyDatas.mode.get(i).equals("Circle"))){
+					g.drawOval(sp.x, sp.y, ep.x - sp.x, ep.y - sp.y);
+				}
+					
+				else if(MyDatas.mode.get(i).equals("Quadrangle")) {
+					g.drawRect(sp.x, sp.y, ep.x - sp.x, ep.y - sp.y);
+				}
+					
+			}
+		}
+		if(startPoint != null) {
+			g2.setStroke(new BasicStroke(MyDatas.stroke.get(MyDatas.stroke.size()-1),BasicStroke.CAP_ROUND, 0));
+			g2.setColor(MyDatas.color.get(MyDatas.color.size()-1));
+			if(MyDatas.mode.get(MyDatas.mode.size()-1).equals("Line")) {
+				g.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);	
+			}
+			else if(MyDatas.mode.get(MyDatas.mode.size()-1).equals("Circle")) {
+				g.drawOval(startPoint.x, startPoint.y, endPoint.x - startPoint.x, endPoint.y - startPoint.y);	
+			}
+			else if(MyDatas.mode.get(MyDatas.mode.size()-1).equals("Quadrangle")) {
+				g.drawRect(startPoint.x, startPoint.y, endPoint.x - startPoint.x, endPoint.y - startPoint.y);	
+			}
+		}
+		
+	} 
 
 }

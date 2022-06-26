@@ -3,6 +3,7 @@ package com.dale.graphiceditor.datapart;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.Vector;
 
 public class MyDatas {
 	public static ArrayList<Point> startVector = new ArrayList<Point>(); // Ω√¿€
@@ -12,4 +13,5 @@ public class MyDatas {
 	public static ArrayList<Integer> stroke = new ArrayList<Integer>();
 	public static Stack<ArrayList<MyDatas>> forUndoStack = new Stack<ArrayList<MyDatas>>();
 	public static Stack<ArrayList<MyDatas>> forRedoStack = new Stack<ArrayList<MyDatas>>();
+	public static  Vector<Vector<Point>> curves = new Vector<Vector<Point>>();
 }
