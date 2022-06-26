@@ -119,52 +119,7 @@ public class DrawablePanel extends JPanel{
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g); // 부모 페인트호출
-		Graphics2D g2 = (Graphics2D)g;
-		super.paintComponent(g2);
-		
-		
-		for(int i = 0; i < MyDatas.curves.size(); i++) {
-			Point previousPoint2 = MyDatas.curves.get(i).get(0);
-			for(int j = 0; j < MyDatas.curves.get(i).size(); j++) {
-				g.drawLine(previousPoint2.x, previousPoint2.y, MyDatas.curves.get(i).get(j).x, MyDatas.curves.get(i).get(j).y);
-				previousPoint2 = MyDatas.curves.get(i).get(j);
-			}
-		}
-
-		
-		if(MyDatas.startVector.size() != 0){
-			for(int i=0;i<MyDatas.endVector.size();i++){ //벡터크기만큼
-				Point sp = MyDatas.startVector.get(i); // 벡터값을꺼내다
-				Point ep = MyDatas.endVector.get(i);	
-				g2.setStroke(new BasicStroke(MyDatas.stroke.get(i),BasicStroke.CAP_ROUND, 0));
-				g2.setColor(MyDatas.color.get(i));
-				if(MyDatas.mode.get(i).equals("Line")) {
-					g.drawLine(sp.x, sp.y, ep.x, ep.y);// draw line
-				}
-					
-				else if((MyDatas.mode.get(i).equals("Circle"))){
-					g.drawOval(sp.x, sp.y, ep.x - sp.x, ep.y - sp.y);
-				}
-					
-				else if(MyDatas.mode.get(i).equals("Quadrangle")) {
-					g.drawRect(sp.x, sp.y, ep.x - sp.x, ep.y - sp.y);
-				}
-					
-			}
-		}
-		if(startPoint != null) {
-			g2.setStroke(new BasicStroke(MyDatas.stroke.get(MyDatas.stroke.size()-1),BasicStroke.CAP_ROUND, 0));
-			g2.setColor(MyDatas.color.get(MyDatas.color.size()-1));
-			if(MyDatas.mode.get(MyDatas.mode.size()-1).equals("Line")) {
-				g.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);	
-			}
-			else if(MyDatas.mode.get(MyDatas.mode.size()-1).equals("Circle")) {
-				g.drawOval(startPoint.x, startPoint.y, endPoint.x - startPoint.x, endPoint.y - startPoint.y);	
-			}
-			else if(MyDatas.mode.get(MyDatas.mode.size()-1).equals("Quadrangle")) {
-				g.drawRect(startPoint.x, startPoint.y, endPoint.x - startPoint.x, endPoint.y - startPoint.y);	
-			}
-		}
+		Graphics2D g2 = (Graphics2D) g.create();		
 		
 	} 
 

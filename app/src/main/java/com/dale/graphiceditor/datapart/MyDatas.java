@@ -11,7 +11,11 @@ public class MyDatas {
 	public static ArrayList<String> mode = new ArrayList<String>();//도형이름 저장
 	public static ArrayList<Color> color = new ArrayList<Color>();
 	public static ArrayList<Integer> stroke = new ArrayList<Integer>();
-	public static Stack<ArrayList<MyDatas>> forUndoStack = new Stack<ArrayList<MyDatas>>();
-	public static Stack<ArrayList<MyDatas>> forRedoStack = new Stack<ArrayList<MyDatas>>();
 	public static  Vector<Vector<Point>> curves = new Vector<Vector<Point>>();
+	public static Stack<Object> shapeMemory = new Stack<Object>();
+	public static Stack<Color> colorMemory = new Stack<Color>();
+	public static Stack<Integer> strokeMemory = new Stack<Integer>();
+	public static Stack<Object> shapeRedoMemory = new Stack<Object>();
+	public static Stack<Color> colorRedoMemory = new Stack<Color>();
+	public static Stack<Integer> strokeRedoMemory = new Stack<Integer>();
 }

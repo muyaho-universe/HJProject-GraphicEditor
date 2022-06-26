@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import com.dale.graphiceditor.buttons.PrimaryColorButton.SecondaryColor;
+
 import com.dale.graphiceditor.mouse.MyMouse;
 
 public class LineSelectButton extends JToggleButton{

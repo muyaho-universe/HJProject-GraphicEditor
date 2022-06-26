@@ -1,5 +1,6 @@
 package com.dale.graphiceditor.panel;
 
+import java.awt.Color;
 import java.awt.Container;
 
 import javax.swing.*;
@@ -42,5 +43,22 @@ public class ColorButtonsPanel extends JPanel{
 	public void setSize() {
 		this.setBounds(0, 0,
 				120, 115);
+	}
+	
+	
+	public void setSecondaryRGB(Color color) {
+		secondaryColor.setColor(color);
+	}
+	
+	public void setPrimaryRGB(Color color) {
+		primaryColor.setColor(color);
+	}
+	
+	public PrimaryColorButton getPrimaryColor() {
+		return primaryColor;
+	}
+	
+	public SecondaryColorButton getSecondaryColor() {
+		return secondaryColor;
 	}
 }
