@@ -18,4 +18,5 @@ public class MyDatas {
 	public static Stack<Object> shapeRedoMemory = new Stack<Object>();
 	public static Stack<Color> colorRedoMemory = new Stack<Color>();
 	public static Stack<Integer> strokeRedoMemory = new Stack<Integer>();
+	public static ArrayList<Point> sketchMemory ;
 }

@@ -8,10 +8,15 @@ import javax.swing.event.MouseInputAdapter;
 import com.dale.graphiceditor.GraphicEditorFrame;
 import com.dale.graphiceditor.SkectchArea;
 import com.dale.graphiceditor.buttons.DragPoint;
-import com.dale.graphiceditor.datapart.MyDatas;
+import com.dale.graphiceditor.datapart.*;
 import com.dale.graphiceditor.mouse.*;
+
 import java.awt.event.*;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.Stack;
 import java.util.Vector;
 
 public class DrawablePanel extends JPanel{
@@ -19,9 +24,15 @@ public class DrawablePanel extends JPanel{
 	private boolean isDrawing = false;
 	private ArrayList<Point> startVector = new ArrayList<Point>();
 	private ArrayList<Point> endVector = new ArrayList<Point>();
-	
+	Stack<Data> memo = new Stack<Data>();
 	private Point startPoint = null;
 	private Point endPoint = null;
+	
+	Point a = new Point(0, 0);
+	Point b = new Point(0, 0);
+	Line2D.Double line;
+	Rectangle2D.Double rectangle;
+	Ellipse2D.Double ellipse;
 	
 	public DrawablePanel() {
 		this.setBackground(Color.WHITE);
@@ -38,89 +49,155 @@ public class DrawablePanel extends JPanel{
 	}
 	
 	public class MyMouseListener extends MouseInputAdapter {
-		
-		Graphics g = getGraphics();
-		Graphics2D g2 = (Graphics2D) g;
-		
-		public void mouseDragged(MouseEvent e) {
-			// TODO Auto-generated method stub
-			if(MyMouse.currentMode.equals("Line")) {
-				endPoint = e.getPoint();
-				repaint();
-			}
-			else if(MyMouse.currentMode.equals("Polyline")) {
-				MyDatas.curves.get(MyDatas.curves.size()-1).add(new Point(e.getX(), e.getY()));
-				repaint(0,0,getWidth(), getHeight());
-				
-			}
-			else if(MyMouse.currentMode.equals("Circle")) {
-				endPoint = e.getPoint();
-				repaint();
-			}
-			else if(MyMouse.currentMode.equals("Quadrangle")) {
-				endPoint = e.getPoint();
-				repaint();
-			}
-		}
+	      int count = 0;
+	      @Override
+	      public void mousePressed(MouseEvent e) {
+	    	  startPoint = e.getPoint(); // 클릭한부분을 시작점으로
+	    	  a.setLocation(0, 0);
+	          b.setLocation(0, 0);
+	          System.out.println("무야호~");
+	         a.setLocation(e.getX(), e.getY());
+	         MyDatas.sketchMemory = new ArrayList<Point>();
+	      }
+	      @Override
+	      public void mouseReleased(MouseEvent e) {
+	    	  System.out.println("이야호~");
+	         Shape shape;
+	         endPoint = e.getPoint(); // 드래그 한부분을 종료점으로
+	         Graphics g = getGraphics();
+	         Graphics2D g2 = (Graphics2D) g;
+	         g2.setColor(MyMouse.currentColor);
+	         float[] dash = new float[] { 10, 5, 5, 5 };
+	         // g2.setStroke(new BasicStroke(5,0,BasicStroke.JOIN_MITER,1.0f,dash, 0));
+	         g2.setStroke(new BasicStroke(MyMouse.currentStroke));
+	         int twoDx = Math.min(startPoint.x, endPoint.x);
+	         int twoDy = Math.min(startPoint.y, endPoint.y);
+	         int absX = Math.abs(startPoint.x - endPoint.x);
+	         int absY = Math.abs(startPoint.y - endPoint.y);
+	         if (MyMouse.currentMode.equals("Line")) {
+	            shape = new Line2D.Double(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+	            //g2.draw(shape);
+	            memo.add(new Data(shape, MyMouse.currentColor, MyMouse.currentStroke));
+	            repaint();
+	         }
+	         if (MyMouse.currentMode.equals("Quadrangle")) {
+	            shape = new Rectangle2D.Double(twoDx, twoDy, absX, absY);
+	            //g2.draw(shape);
+	            memo.add(new Data(shape, MyMouse.currentColor, MyMouse.currentStroke));
+	            repaint();
+	         }
+	         if (MyMouse.currentMode.equals("Circle")) {
+	            shape = new Ellipse2D.Double(twoDx, twoDy, absX, absY);
+	            //g2.draw(shape);
+	            memo.add(new Data(shape, MyMouse.currentColor, MyMouse.currentStroke));
+	            repaint();
+	         }
+	         if (MyMouse.currentMode.equals("PolyLine")) {
+	            memo.add(new Data(MyDatas.sketchMemory, MyMouse.currentColor, MyMouse.currentStroke));
 
-		public void mouseMoved(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		public void mousePressed(MouseEvent e){
-			if(MyMouse.currentMode.equals("Polyline")) {
-				var newCurve = new Vector<Point>();
-				newCurve.add(new Point(e.getX(), e.getY()));
-				MyDatas.curves.add(newCurve);
-//				curveStroke.add(SelectBar.tsize);
-//				curves.add(new Point(e.getX(), e.getY()));
-			}
-			else {
-				MyDatas.mode.add(MyMouse.currentMode);
-				MyDatas.stroke.add(MyMouse.currentStroke);
-				MyDatas.color.add(MyMouse.currentColor);
-				if(MyMouse.currentMode.equals("Line")) {
-					startPoint = e.getPoint();
-					MyDatas.startVector.add(e.getPoint()); // 클릭한부분을 시작점으로
-				}
-				else if(MyMouse.currentMode.equals("Circle")) {
-					startPoint = e.getPoint();
-					MyDatas.startVector.add(e.getPoint()); // 클릭한부분을 시작점으로
-				}
-				else if(MyMouse.currentMode.equals("Quadrangle")) {
-					startPoint = e.getPoint();
-					MyDatas.startVector.add(e.getPoint()); // 클릭한부분을 시작점으로
-				}
-			}
-		}
-		public void mouseReleased(MouseEvent e){
-			if(MyMouse.currentMode.equals("Line")) {
-				MyDatas.endVector.add(e.getPoint()); // 드래그 한부분을 종료점으로
-				endPoint = e.getPoint();
-				repaint(); // 다시그려라
-			}
-			else if(MyMouse.currentMode.equals("Circle")) {
-				MyDatas.endVector.add(e.getPoint()); // 드래그 한부분을 종료점으로
-				endPoint = e.getPoint();
-				repaint(); // 다시그려라
-			}
-			else if(MyMouse.currentMode.equals("Quadrangle")) {
-				MyDatas.endVector.add(e.getPoint()); // 드래그 한부분을 종료점으로
-				endPoint = e.getPoint();
-				repaint(); // 다시그려라
-			}
-//			for(int i = 0; i < stroke.size(); i++) {
-//				System.out.println(stroke.get(i));
-//			}
-		}
-		
-	}
+	            repaint();
+	            //sketchMemory.clear();
+	         }
+//	         if (Buttons.erase == true) {
+//	            memo.add(new Data(MyDatas.sketchMemory, Color.WHITE, 30));
+//	            
+//	         }
+
+//	         shapeRedoMemory.clear();
+//	         colorRedoMemory.clear();
+//	         strokeRedoMemory.clear();
+	      }
+	      
+	      @Override
+	      public void mouseDragged(MouseEvent e) {
+	    	 System.out.println("야호~");
+	         endPoint = e.getPoint();
+	         Graphics g = getGraphics();
+	         Graphics2D g2 = (Graphics2D) g;
+	         g2.setColor(MyMouse.currentColor);
+	         float[] dash = new float[] { 10, 5, 5, 5 };
+	         // g2.setStroke(new BasicStroke(5,0,BasicStroke.JOIN_MITER,1.0f,dash, 0));
+	         g2.setStroke(new BasicStroke(MyMouse.currentStroke));
+	         int twoDx = Math.min(startPoint.x, endPoint.x);
+	         int twoDy = Math.min(startPoint.y, endPoint.y);
+	         int absX = Math.abs(startPoint.x - endPoint.x);
+	         int absY = Math.abs(startPoint.y - endPoint.y);
+	         if (MyMouse.currentMode.equals("Line")) {
+//	            repaint();
+	            g2.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+	            return;
+	         }
+	         if (MyMouse.currentMode.equals("Quadrangle")) {
+	            repaint();
+	            g2.drawRect(twoDx, twoDy, absX, absY);
+	            return;
+	         }
+	         if (MyMouse.currentMode.equals("Circle")) {
+	            repaint();
+	            g2.drawOval(twoDx, twoDy, absX, absY);
+	            return;
+	         }
+	         if (MyMouse.currentMode.equals("PolyLine")) {// sketch
+	            if (b.x != 0 && b.y != 0) {
+	               a.x = b.x;
+	               a.y = b.y;
+	            }
+	            b.setLocation(e.getX(), e.getY());
+	            g2.drawLine(a.x, a.y, b.x, b.y);
+	            MyDatas.sketchMemory.add(new Point(e.getX(),e.getY()));
+	         }
+//	         if (Buttons.erase == true) { // 지우개
+//	            if (b.x != 0 && b.y != 0) {
+//	               a.x = b.x;
+//	               a.y = b.y;
+//	            }
+//	            b.setLocation(e.getX(), e.getY());
+//	            g2.drawLine(a.x, a.y, b.x, b.y);
+//	            MyDatas.sketchMemory.add(new Point(e.getX(),e.getY()));
+//	            g2.setColor(Color.WHITE);
+//	            g2.setStroke(new BasicStroke(30));
+//	            g2.drawLine(a.x, a.y, b.x, b.y);
+//	            
+//	            MyDatas.sketchMemory.add(new Point(e.getX(),e.getY()));
+//	         }
+	      }
+
+	      public void mouseMoved(MouseEvent e) { // 지우개 
+	         Graphics g = getGraphics();
+	         Graphics2D g2 = (Graphics2D) g;
+//	         if (Buttons.erase == true) {
+//	            repaint();
+//	            g2.setColor(Color.BLACK);
+//	            g2.setStroke(new BasicStroke(30));
+//	            line = new Line2D.Double(e.getPoint().x, e.getPoint().y, e.getPoint().x, e.getPoint().y);
+//	            g2.draw(line);
+//
+//	         }
+	      }
+	   }
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g); // 부모 페인트호출
-		Graphics2D g2 = (Graphics2D) g.create();		
+		Graphics2D g2 = (Graphics2D) g.create();
 		
+		if (!memo.isEmpty()) {
+	         for (int i = 0; i < memo.size(); i++) {
+	            //System.out.println(memo.get(i).shape);
+	            // System.out.println(i+ " "+ memo.get(i));
+	            g2.setColor(memo.get(i).getColor());
+	            g2.setStroke(new BasicStroke(memo.get(i).getStroke()));
+	            if (memo.get(i).getShape() == null) {
+	               for (int j = 0; j < memo.get(i).getSketch().size()-1; j++) {
+	                  //System.out.println(memo.get(i).sketch.get(j).x + " " + memo.get(i).sketch.get(j).y);
+	                  g2.drawLine(memo.get(i).getSketch().get(j).x, memo.get(i).getSketch().get(j).y, memo.get(i).getSketch().get(j+1).x, memo.get(i).getSketch().get(j+1).y);
+	               }
+	            } else {
+	               g2.draw((Shape) memo.get(i).getShape());
+	               
+	            }
+//	               System.out.println(memo.get(i).getColor());
+	         }
+	      }
 	} 
 
 }
