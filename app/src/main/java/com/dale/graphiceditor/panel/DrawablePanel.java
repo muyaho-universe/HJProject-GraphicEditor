@@ -9,10 +9,13 @@ import com.dale.graphiceditor.SkectchArea;
 import com.dale.graphiceditor.buttons.DragPoint;
 import com.dale.graphiceditor.mouse.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class DrawablePanel extends JPanel{
 	private boolean hasMouse = false;
 	private boolean isDrawing = false;
+	private ArrayList<Point> startVector = new ArrayList<Point>();
+	private ArrayList<Point> endVector = new ArrayList<Point>();
 	
 	public DrawablePanel() {
 		this.setBackground(Color.WHITE);
@@ -77,55 +80,44 @@ public class DrawablePanel extends JPanel{
 		}
 		
 	}
-//	public void paintComponent(Graphics g){
-//        super.paintComponent(g); // 부모 페인트호출
-//        Graphics2D g2d = (Graphics2D) g.create();
-//          
-//        if(sv.size() != 0){
-//           for(int i=0;i<se.size();i++){ 
-//              //넣은 리스트 크기만큼
-//              Point sp = sv.get(i); // 시작점
-//              Point ep = se.get(i); // 끝점
-//              String on = name.get(i); // 이름
-//              Color tmp = co.get(i); // 색깔
-//              Integer s = st.get(i);//굵기
-//              //꺼내서 도형 그려주기
-//              
-//              g2d.setColor(tmp); //Lines' Color is set here
-//              g2d.setStroke(new BasicStroke(s));
-//              if(on.equals("rect")) {
-//                 g2d.drawRect(Math.min(sp.x,ep.x), Math.min(sp.y,ep.y), Math.abs(sp.x-ep.x), Math.abs(sp.y-ep.y));
-//              }
-//              else if(on.equals("line")) {
-//                 g2d.drawLine(sp.x, sp.y, ep.x, ep.y);
-//              }
-//              else if(on.equals("circle")) {
-//                 g2d.drawOval(Math.min(sp.x, ep.x), Math.min(sp.y, ep.y),Math.abs(sp.x- ep.x),Math.abs(sp.y - ep.y));
-//              }
-//              
-//              else if(on.equals("pen")) {
+	public void paintComponent(Graphics g){
+	    super.paintComponent(g); // 부모 페인트호출
+	    Graphics2D g2d = (Graphics2D) g.create();
+          
+	    g2d.setColor(MyMouse.currentColor); //Lines' Color is set here
+	    g2d.setStroke(new BasicStroke(MyMouse.currentStroke));
+	    
+	    if(MyMouse.currentMode.equals("Quadrangle")) {
+	         g2d.drawRect(Math.min(50,30), Math.min(30,400), Math.abs(50-30), Math.abs(30-400));
+	    }
+//	    else if(MyMouse.currentMode.equals("Line")) {
+//	       g2d.drawLine(sp.x, sp.y, ep.x, ep.y);
+//	    }
+//	    else if(MyMouse.currentMode.equals("Circle")) {
+//	       g2d.drawOval(Math.min(sp.x, ep.x), Math.min(sp.y, ep.y),Math.abs(sp.x- ep.x),Math.abs(sp.y - ep.y));
+//	    }
+	      
+//        else if(MyMouse.currentMode..equals("pen")) {
 //
-//                 if(index>=0) {
-//                    System.out.println("index는"+index);
-//                 for(int j=0; j<for_pen.get(index).size()-1; j++) {
-//                       Point tmp_a =null;
-//                       Point tmp_b =null;
-//                       b = for_pen.get(index).get(j);
-//                       a = for_pen.get(index).get(j+1);
-//                       
-//                       g2d.drawLine(b.x,b.y,a.x,a.y);
-//                    }
-//                    index--;
-//                 }
-//
-//                 
-//              }
-//              
-//              
-//           }
-//        }
-//        
-//        //마우스로 클릭하면서 연속적으로 그려지는 도형
+//        	if(index>=0) {
+//        		System.out.println("index는"+index);
+//        		for(int j=0; j<for_pen.get(index).size()-1; j++) {
+//	        		Point tmp_a =null;
+//	                Point tmp_b =null;
+//	                b = for_pen.get(index).get(j);
+//	                a = for_pen.get(index).get(j+1);
+//	               
+//	                g2d.drawLine(b.x,b.y,a.x,a.y);
+//        		}
+//        		index--;
+//        	}   
+//      }
+          
+          
+	}
+        
+        
+        //마우스로 클릭하면서 연속적으로 그려지는 도형
 //        if(startP != null) {
 //           g2d.setColor(ColorChooser.color);
 //           g2d.setStroke(new BasicStroke(Button_stroke.stroke));
@@ -144,6 +136,6 @@ public class DrawablePanel extends JPanel{
 //        
 //           }
 //        }
-//     }
+     
 
 }
