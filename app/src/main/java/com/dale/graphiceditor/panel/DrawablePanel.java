@@ -59,6 +59,7 @@ public class DrawablePanel extends JPanel{
 	         a.setLocation(e.getX(), e.getY());
 	         MyDatas.sketchMemory = new ArrayList<Point>();
 	      }
+	      
 	      @Override
 	      public void mouseReleased(MouseEvent e) {
 	    	  System.out.println("ÀÌ¾ßÈ£~");

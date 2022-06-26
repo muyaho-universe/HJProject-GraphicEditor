@@ -76,6 +76,7 @@ public class ResizablePanel extends JPanel {
 		rightDragButton.addMouseMotionListener(new MouseMotionAdapter() {
 	        @Override
 	        public void mouseDragged(MouseEvent e) {
+	        	System.out.println("다메다메 다메요~");
                 drawablePanel.setSize((int)(drawablePanel.getWidth()+(e.getPoint().getX()-dragLocation.getX())),
                 		drawablePanel.getHeight());
                 dragLocation = e.getPoint();  
