@@ -6,8 +6,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import com.dale.graphiceditor.frame.StrokeSelectFrame;
+
 public class StrokeSelectButton extends JButton {
-	
+	StrokeSelectFrame strokeSelectFrame;
 	
 	public StrokeSelectButton() {
 		super("º±±Ω±‚ º±≈√");
@@ -23,7 +25,7 @@ public class StrokeSelectButton extends JButton {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+			strokeSelectFrame = new StrokeSelectFrame(true);
 			
 		}
 	}

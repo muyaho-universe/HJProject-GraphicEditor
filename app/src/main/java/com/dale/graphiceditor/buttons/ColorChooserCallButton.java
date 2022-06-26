@@ -31,7 +31,7 @@ public class ColorChooserCallButton extends JButton {
 			// TODO Auto-generated method stub
 			String cmd = e.getActionCommand();
 			if(cmd.equals("»ö ÆíÁý")){
-				Color selectedColor = chooser.showDialog(null, "Color", Color.YELLOW);
+				Color selectedColor = chooser.showDialog(null, "Color", Color.RED);
 				
 				if(selectedColor != null) {
 					
