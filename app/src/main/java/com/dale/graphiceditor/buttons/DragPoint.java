@@ -19,6 +19,7 @@ public class DragPoint extends JButton {
 	private boolean isDragged = false;
 	private int currentMouseX, currentMouseY;
 	private static final long serialVersionUID = 1L;
+	private Point dragLocation  = new Point();
 	
 
 	public DragPoint() { 
@@ -48,6 +49,7 @@ public class DragPoint extends JButton {
 				// TODO Auto-generated method stub
 				if(hasMouse) {
 					isDragged = true;
+					dragLocation = e.getPoint();
 				}			
 	 		    System.out.println("Pressed " + text + " isDragged " + isDragged);
 			}
@@ -145,5 +147,17 @@ public class DragPoint extends JButton {
 	
 	public boolean isDragged() {
 		return isDragged;
+	}
+	
+	public boolean hasMouse() {
+		return hasMouse;
+	}
+	
+	public Point getDragPoint() {
+		return dragLocation;
+	}
+	
+	public void setDragPoint(Point newPoint) {
+		dragLocation = newPoint;
 	}
 }

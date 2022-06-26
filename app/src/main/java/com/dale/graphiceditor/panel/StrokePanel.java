@@ -11,7 +11,7 @@ public class StrokePanel extends JPanel {
 	}
 	
 	public void createPanel() {
-		this.setBounds(250, 0, 100, 162);
+		this.setBounds(168, 0, 100, 162);
 		this.setLayout(null);
 		strokeSelectButton.createButton();
 		strokeSelectButton.setSize();

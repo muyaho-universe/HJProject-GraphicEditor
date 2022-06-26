@@ -12,25 +12,20 @@ import com.dale.graphiceditor.panel.ResizablePanel;
 
 @SuppressWarnings("serial")
 public class SkectchArea extends JPanel {
-	public static BottomDragButton bottomDragButton = new BottomDragButton("bottom");
-	public static AngleDragButton angleDragButton = new AngleDragButton("angle");
-	public static RightDragButton rightDragButton = new RightDragButton("right");	
+	
 	
 	public SkectchArea() {
 		
 		ResizablePanel skectchAreaPanel =  new ResizablePanel();
-		DrawablePanel drawablePanel =  new DrawablePanel();
+	
 		//START POINT: setting skectchAreaPanel GraphicEditorFrame.skectchAreaPanelX, GraphicEditorFrame.skectchAreaPanelY
 		
 		System.out.println(GraphicEditorFrame.skectchAreaPanelX+" "+ GraphicEditorFrame.skectchAreaPanelY+" "+ 
 				GraphicEditorFrame.skectchAreaPanelWidth+" "+ GraphicEditorFrame.skectchAreaPanelHeight);
 		skectchAreaPanel.makeItResizable();
-		skectchAreaPanel.add(bottomDragButton);
-		skectchAreaPanel.add(angleDragButton);
-		skectchAreaPanel.add(rightDragButton);
-		drawablePanel.setSize();
+		
 		skectchAreaPanel.setSize();
-		skectchAreaPanel.add(drawablePanel);
+		
 		
 		
 		skectchAreaPanel.setBackground(Color.BLUE);

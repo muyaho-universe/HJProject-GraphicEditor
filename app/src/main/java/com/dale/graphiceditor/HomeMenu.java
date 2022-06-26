@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
+import com.dale.graphiceditor.panel.DrawablePanel;
 import com.dale.graphiceditor.panel.StrokePanel;
 
 public class HomeMenu extends JPanel{
