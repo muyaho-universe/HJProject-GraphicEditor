@@ -7,11 +7,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JColorChooser;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.dale.graphiceditor.buttons.ColorSelectButtons;
+import com.dale.graphiceditor.mouse.MyMouse;
 import com.dale.graphiceditor.panel.*;
 
 public class AttributeArea extends JPanel {
@@ -40,9 +42,8 @@ public class AttributeArea extends JPanel {
 		
 		colorEditPanel.createPanel();
 		colorEditPanel.setSize();
-		colorEditPanel.setBackground(Color.DARK_GRAY);
-		
-		
+				
+		colorEditPanel.getColorChooser().addActionListener(new MenuActionListener());
 		this.add(colorSelectPanel);
 		this.add(colorButtonsPanel);
 		this.add(colorEditPanel);
@@ -54,14 +55,13 @@ public class AttributeArea extends JPanel {
 		for(y = 0; y < 75; y += 25) {
 			z = 0;
 			for(x = 0; x < 250; x+= 25) {
-				ColorSelectButtons colorSelect = colorSelect = new ColorSelectButtons(x, y, 255 - y*3, 255 - x, 255 - z);
+				ColorSelectButtons colorSelect = new ColorSelectButtons(x, y, 255 - y*3, 255 - x, 255 - z);
 				colorSelect.creatButton();
 				colorSelect.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
 						selectedColor = colorSelect.getColor();
-						System.out.println(colorSelect.getColor());
 					}
 					
 				});
@@ -72,9 +72,11 @@ public class AttributeArea extends JPanel {
 						// TODO Auto-generated method stub
 						if(colorButtonsPanel.getPrimaryColor().isSelected()) {
 							colorButtonsPanel.setPrimaryRGB(selectedColor);
+
 						}
 						if(colorButtonsPanel.getSecondaryColor().isSelected()) {
-							colorButtonsPanel.setPrimaryRGB(selectedColor);
+							colorButtonsPanel.setSecondaryRGB(selectedColor);
+			
 						}
 					}
 				});
@@ -98,6 +100,20 @@ public class AttributeArea extends JPanel {
 				GraphicEditorFrame.attributesPanelWidth +130 , GraphicEditorFrame.attributesPanelHeight);
 		System.out.println(GraphicEditorFrame.attributesPanelWidth  +" "+ GraphicEditorFrame.attributesPanelHeight);
 	}
-
-	
+	class MenuActionListener implements ActionListener {
+		JColorChooser chooser = new JColorChooser();
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			String cmd = e.getActionCommand();
+			if(cmd.equals("»ö ÆíÁý")){
+				Color selectedColor = chooser.showDialog(null, "Color", Color.RED);
+				
+				if(selectedColor != null) {
+					MyMouse.currentColor = selectedColor;
+					colorButtonsPanel.setPrimaryRGB(selectedColor);
+				}
+			}
+		}
+	}
 }

@@ -8,6 +8,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
+import com.dale.graphiceditor.mouse.MyMouse;
+import com.dale.graphiceditor.*;
 
 
 public class ColorChooserCallButton extends JButton {
@@ -31,6 +33,7 @@ public class ColorChooserCallButton extends JButton {
 				Color selectedColor = chooser.showDialog(null, "Color", Color.RED);
 				
 				if(selectedColor != null) {
+					MyMouse.currentColor = selectedColor;
 					
 				}
 			}

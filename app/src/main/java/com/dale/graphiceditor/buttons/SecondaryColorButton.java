@@ -15,6 +15,7 @@ import com.dale.graphiceditor.mouse.MyMouse;
 
 public class SecondaryColorButton extends JToggleButton {
 	private JPanel secondaryColorPanel;
+	
 	private JTextField name;
 	private boolean isSelected = false;
 	
@@ -26,6 +27,8 @@ public class SecondaryColorButton extends JToggleButton {
 	
 	public void setColor(Color color) {
 		secondaryRGBColor = color;
+		secondaryColorPanel.setBackground(secondaryRGBColor);
+		MyMouse.currentColor = secondaryRGBColor;
 	}
 	
 	public Color getColor() {
@@ -49,6 +52,7 @@ public class SecondaryColorButton extends JToggleButton {
 		this.add(secondaryColorPanel, BorderLayout.CENTER);
 		this.add(name, BorderLayout.SOUTH);
 		this.addActionListener(new SecondaryColor());
+//		this.add
 	}	
 		
 	class SecondaryColor implements ActionListener {

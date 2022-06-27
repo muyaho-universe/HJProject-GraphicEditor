@@ -32,9 +32,9 @@ public class ColorButtonsPanel extends JPanel{
 		colorSelectPanel.setSize();
 		colorSelectPanel.createPanel();
 		buttonGroup.add(primaryColor);
-		buttonGroup.add(secondaryColor);
+//		buttonGroup.add(secondaryColor);
 		container.add(primaryColor);
-		container.add(secondaryColor);
+//		container.add(secondaryColor);
 		container.setBounds(0, 0, 200, 200);
 		this.add(container);
 		
@@ -60,5 +60,13 @@ public class ColorButtonsPanel extends JPanel{
 	
 	public SecondaryColorButton getSecondaryColor() {
 		return secondaryColor;
+	}
+	public JToggleButton getSelectedButton() {
+		if(primaryColor.isSelected()) {
+			return primaryColor;
+		}
+		else {
+			return secondaryColor;
+		}
 	}
 }

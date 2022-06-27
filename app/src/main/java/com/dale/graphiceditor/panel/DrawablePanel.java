@@ -105,7 +105,7 @@ public class DrawablePanel extends JPanel {
 	         if (MyMouse.currentMode.equals("Polyline")) {
 	        	 MyDatas.memo.add(new Data(MyDatas.sketchMemory, MyMouse.currentColor, MyMouse.currentStroke));
 
-	            repaint();
+//	            repaint();
 	            //sketchMemory.clear();
 	         }
 	         
@@ -199,7 +199,11 @@ public class DrawablePanel extends JPanel {
 	public void paintComponent(Graphics g){
 	    super.paintComponent(g); // 부모 페인트호출
 		Graphics2D g2 = (Graphics2D) g.create();
-		
+		if(MyDatas.isLoaded) {
+			g.drawImage(MyDatas.loadedImage, 0, 0, this);
+			
+//			MyDatas.memo.add(null);
+		}
 		if (!MyDatas.memo.isEmpty()) {
 			if(MyDatas.isLoaded) {
 				g.drawImage(MyDatas.loadedImage, 0, 0, this);
@@ -207,8 +211,7 @@ public class DrawablePanel extends JPanel {
 //				MyDatas.memo.add(null);
 			}
 	         for (int i = 0; i < MyDatas.memo.size(); i++) {
-	            //System.out.println(memo.get(i).shape);
-	            // System.out.println(i+ " "+ memo.get(i));
+	            
 	            g2.setColor(MyDatas.memo.get(i).getColor());
 	            g2.setStroke(new BasicStroke(MyDatas.memo.get(i).getStroke()));
 	            if (MyDatas.memo.get(i).getShape() == null) {
@@ -233,7 +236,9 @@ public class DrawablePanel extends JPanel {
 			else if(MyMouse.currentMode.equals("PolyLine")) {
 				for(int i =0; i<MyDatas.sketchMemory.size()-1; i++) {
 					g2.drawLine(MyDatas.sketchMemory.get(i).x, MyDatas.sketchMemory.get(i).y, MyDatas.sketchMemory.get(i+1).x, MyDatas.sketchMemory.get(i+1).y);
+					
 				}
+				MyDatas.sketchMemory.clear();
 			}
 	//			else if(GraphicEditor.tool.equals("Eraser")) {
 	//				for(int i =0; i<pointArrayList.size()-1; i++) {
