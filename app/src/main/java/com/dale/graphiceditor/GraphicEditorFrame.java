@@ -150,6 +150,32 @@ public class GraphicEditorFrame extends JFrame{
                 
             }
         });
+		additionalFunctionPanel.menuBar.getMenu().getSaveFileMenuItem().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FileDialog fileDialogOpen = new FileDialog(GraphicEditorFrame.this, "파일 저장", FileDialog.SAVE);
+                fileDialogOpen.setVisible(true);
+                String filePath = fileDialogOpen.getDirectory() + fileDialogOpen.getFile() + ".png";
+				// TODO Auto-generated method stub
+				File file = new File(filePath);
+				System.out.println(filePath);
+				
+				if (!file.exists())
+					try {
+						file.createNewFile();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				try {
+					ImageIO.write(MyDatas.currentImage, "png", file);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		
 		UndoButton undo = new UndoButton();
 		RedoButton redo = new RedoButton();
