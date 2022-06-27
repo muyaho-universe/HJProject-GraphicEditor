@@ -9,6 +9,7 @@ import javax.swing.*;
 
 import com.dale.graphiceditor.mouse.*;
 import com.dale.graphiceditor.buttons.*;
+import com.dale.graphiceditor.datapart.MyDatas;
 import com.dale.graphiceditor.panel.*;
 
 public class GraphicEditorFrame extends JFrame{
@@ -125,8 +126,33 @@ public class GraphicEditorFrame extends JFrame{
 		mainPanel.add(toolsPanel);
 		mainPanel.add(additionalFunctionPanel);
 		mainPanel.add(skectchArea);
-		
 		this.setJMenuBar(additionalFunctionPanel.menuBar);
+
+		
+		additionalFunctionPanel.menuBar.getMenu().getLoadFileMenuItem().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FileDialog fileDialogOpen = new FileDialog(GraphicEditorFrame.this, "파일 열기", FileDialog.LOAD);
+                fileDialogOpen.setVisible(true);
+                String filePath = fileDialogOpen.getDirectory() + fileDialogOpen.getFile();
+                MyDatas.loadedImage = filePath;
+                System.out.println(filePath);
+            }
+        });
+		
+		UndoButton undo = new UndoButton();
+		RedoButton redo = new RedoButton();
+		
+		undo.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
 		this.add(mainPanel);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -20,9 +20,6 @@ public class ColorChooserCallButton extends JButton {
 	public void createButton() {
 		this.addActionListener(new MenuActionListener());
 		
-		
-//		this.setSize(100, 100);
-		
 	}
 	class MenuActionListener implements ActionListener {
 		JColorChooser chooser = new JColorChooser();

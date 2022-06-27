@@ -1,6 +1,8 @@
 package com.dale.graphiceditor.panel;
 
 import java.awt.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.ChangeEvent;
@@ -17,6 +19,9 @@ import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.Vector;
@@ -29,6 +34,7 @@ public class DrawablePanel extends JPanel {
 	Stack<Data> memo = new Stack<Data>();
 	private Point startPoint = null;
 	private Point endPoint = null;
+	private BufferedImage image;
 	
 	Point a = new Point(0, 0);
 	Point b = new Point(0, 0);
@@ -103,6 +109,8 @@ public class DrawablePanel extends JPanel {
 	            repaint();
 	            //sketchMemory.clear();
 	         }
+	         
+	         
 //	         if (Buttons.erase == true) {
 //	            memo.add(new Data(MyDatas.sketchMemory, Color.WHITE, 30));
 //	            
@@ -230,7 +238,8 @@ public class DrawablePanel extends JPanel {
 	//				}
 	//			}
 		}
+		
+	}
 	
-	} 
 	
 }

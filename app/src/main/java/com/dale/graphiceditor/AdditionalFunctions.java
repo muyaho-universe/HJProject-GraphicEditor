@@ -1,6 +1,7 @@
 package com.dale.graphiceditor;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 
 import javax.swing.JPanel;
 
@@ -10,19 +11,14 @@ import com.dale.graphiceditor.menubar.MenuBar;
 public class AdditionalFunctions extends JPanel {
 	public MenuBar menuBar;
 	AdditionalFunctions(){
-		setLayout(null);
+		setLayout(new FlowLayout());
 		setBackground(Color.BLACK);
 	}
 	
 	public void setSize() {
-		setBounds(0, GraphicEditorFrame.additionalFunctionPanelHeight / 2, GraphicEditorFrame.additionalFunctionPanelWidth- 100, GraphicEditorFrame.additionalFunctionPanelHeight / 2);
+		setBounds(0, GraphicEditorFrame.additionalFunctionPanelHeight , GraphicEditorFrame.additionalFunctionPanelWidth, GraphicEditorFrame.additionalFunctionPanelHeight);
 	}
-	public void setDoButtons() {
-		RedoButton redo = new RedoButton();
-		UndoButton undo = new UndoButton();
-		this.add(redo);
-		this.add(undo);
-	}
+	
 	
 	public void setMenuBar() {
 		menuBar = new MenuBar();

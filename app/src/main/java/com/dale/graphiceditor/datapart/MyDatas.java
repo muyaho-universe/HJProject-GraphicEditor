@@ -22,4 +22,5 @@ public class MyDatas {
 	public static ArrayList<Point> sketchMemory ;
 	
 	public static BufferedImage currentImage;
+	public static String loadedImage = null;
 }

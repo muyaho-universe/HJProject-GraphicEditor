@@ -8,14 +8,13 @@ import javax.swing.JFrame;
 
 import javax.swing.JMenuItem;
 
-public class LoadFileMenuItem extends JMenuItem implements ActionListener{
+
+
+public class LoadFileMenuItem extends JMenuItem{
+	String fileName;
 	LoadFileMenuItem(){
 		super("불러오기");
 	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }
