@@ -36,8 +36,9 @@ public class ResizablePanel extends JPanel {
 		drawablePanel.setSize();
 		this.add(drawablePanel);
 		this.add(bottomDragButton);
-		this.add(rightDragButton);
+		
 		this.add(angleDragButton);
+
 		
 		if(rightDragButton.hasMouse()) {
 			dragLocation = rightDragButton.getDragPoint();
@@ -57,39 +58,73 @@ public class ResizablePanel extends JPanel {
 	        	drawablePanel.setSize((int)(drawablePanel.getWidth()+(e.getPoint().getX()-dragLocation.getX())),
                         (int)(drawablePanel.getHeight()+(e.getPoint().getY()-dragLocation.getY())));
 	        	dragLocation = e.getPoint();
+	        	bottomDragButton.setX(drawablePanel.getWidth()/2);
+                bottomDragButton.setY(drawablePanel.getHeight());
+                bottomDragButton.setBounds(bottomDragButton.getX(),bottomDragButton.getY(), 40, 40);
+                
+                angleDragButton.setX(drawablePanel.getWidth());
+                angleDragButton.setY(drawablePanel.getHeight());
+                angleDragButton.setBounds(angleDragButton.getX(),angleDragButton.getY(), 40, 40);
+                
+                rightDragButton.setX(drawablePanel.getWidth());
+                rightDragButton.setY(drawablePanel.getHeight()/2);
+                rightDragButton.setBounds(rightDragButton.getX(),rightDragButton.getY(), 40, 40);
 	        }
 		});
-		;
 		
 		bottomDragButton.addMouseMotionListener(new MouseMotionAdapter() {
 	        @Override
 	        public void mouseDragged(MouseEvent e) {
-	        	dragLocation = bottomDragButton.getDragPoint();
 	        	drawablePanel.setSize(drawablePanel.getWidth(),
 	        			(int)(drawablePanel.getHeight()+(e.getPoint().getY()-dragLocation.getY())));
                 dragLocation = e.getPoint();
-//                bottomDragButton.setLocation(drawablePanel.getWidth(),
-//	        			(int)(drawablePanel.getHeight()+(e.getPoint().getY()-dragLocation.getY())));
+                bottomDragButton.setX(drawablePanel.getWidth()/2);
+                bottomDragButton.setY((int)(drawablePanel.getHeight()+(e.getPoint().getY()-dragLocation.getY())));
+                bottomDragButton.setBounds(bottomDragButton.getX(),bottomDragButton.getY(), 40, 40);
+                
+                angleDragButton.setX(drawablePanel.getWidth());
+                angleDragButton.setY((int)(drawablePanel.getHeight()+(e.getPoint().getY()-dragLocation.getY())));
+                angleDragButton.setBounds(angleDragButton.getX(),angleDragButton.getY(), 40, 40);
+                
+                rightDragButton.setX(drawablePanel.getWidth());
+                rightDragButton.setY((int)(drawablePanel.getHeight()+(e.getPoint().getY()-dragLocation.getY()))/2);
+                rightDragButton.setBounds(rightDragButton.getX(),rightDragButton.getY(), 40, 40);
 	        }
 		});
+		
+//		rightDragButton.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				rightDragButton.setLocation(dragLocation);
+//				
+//			}
+//			
+//		});
 		
 		rightDragButton.addMouseMotionListener(new MouseMotionAdapter() {
 	        @Override
 	        public void mouseDragged(MouseEvent e) {
-	        	System.out.println("다메다메 다메요~");
                 drawablePanel.setSize((int)(drawablePanel.getWidth()+(e.getPoint().getX()-dragLocation.getX())),
                 		drawablePanel.getHeight());
                 dragLocation = e.getPoint();  
-//                    System.err.println("in" + " getWidth(): "+drawablePanel.getWidth()  +" (e.getPoint().getX()-dragLocation.getX())): " +(e.getPoint().getX()-dragLocation.getX())
-//                    +" (int)(getHeight(): "+ (int)drawablePanelgetHeight()+ " (e.getPoint().getY()-dragLocation.getY()): " + (e.getPoint().getY()-dragLocation.getY()));
-//                    rightDragButton.setBounds((int)(drawablePanel.getWidth()+(e.getPoint().getX()-dragLocation.getX())), rightDragButton.getY(), rightDragButton.getWidth(), rightDragButton.getWidth());
-	        
+                bottomDragButton.setX(drawablePanel.getWidth()/2);
+                bottomDragButton.setY((int)(drawablePanel.getHeight()+(e.getPoint().getY()-dragLocation.getY())));
+                bottomDragButton.setBounds(bottomDragButton.getX(),bottomDragButton.getY(), 40, 40);
+                
+                angleDragButton.setX(drawablePanel.getWidth());
+                angleDragButton.setY((int)(drawablePanel.getHeight()+(e.getPoint().getY()-dragLocation.getY())));
+                angleDragButton.setBounds(angleDragButton.getX(),angleDragButton.getY(), 40, 40);
+                
+                rightDragButton.setX(drawablePanel.getWidth());
+                rightDragButton.setY((int)(drawablePanel.getHeight()+(e.getPoint().getY()-dragLocation.getY()))/2);
+                rightDragButton.setBounds(rightDragButton.getX(),rightDragButton.getY(), 40, 40);
 	        }
 		});
 		rightDragButton.setDragPoint(dragLocation);
 		bottomDragButton.setDragPoint(dragLocation);
 		angleDragButton.setDragPoint(dragLocation);
-		
+		this.add(rightDragButton);
 	}
 	public DrawablePanel getDrawing() {
 		return drawablePanel;

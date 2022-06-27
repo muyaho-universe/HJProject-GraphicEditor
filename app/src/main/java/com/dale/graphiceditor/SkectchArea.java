@@ -36,10 +36,7 @@ public class SkectchArea extends JPanel  {
 		skectchAreaPanel.setSize();
 		
 		
-		
-		skectchAreaPanel.setBackground(Color.BLUE);
 		this.add(skectchAreaPanel);
-		this.setBackground(Color.CYAN);
 		
 		this.setLayout(null);
 		

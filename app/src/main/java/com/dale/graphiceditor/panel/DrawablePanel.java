@@ -47,7 +47,7 @@ public class DrawablePanel extends JPanel {
 		this.setLayout(null);
 		this.setMinimumSize(new Dimension(5, 5));
 		this.setMaximumSize(new Dimension(GraphicEditorFrame.monitorWidth, GraphicEditorFrame.skectchAreaPanelHeight / 2));	
-		this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+//		this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		this.addMouseListener(new MyMouseListener());
 		this.addMouseMotionListener(new MyMouseListener());
 		
@@ -201,6 +201,11 @@ public class DrawablePanel extends JPanel {
 		Graphics2D g2 = (Graphics2D) g.create();
 		
 		if (!MyDatas.memo.isEmpty()) {
+			if(MyDatas.isLoaded) {
+				g.drawImage(MyDatas.loadedImage, 0, 0, this);
+				
+//				MyDatas.memo.add(null);
+			}
 	         for (int i = 0; i < MyDatas.memo.size(); i++) {
 	            //System.out.println(memo.get(i).shape);
 	            // System.out.println(i+ " "+ memo.get(i));
@@ -238,7 +243,11 @@ public class DrawablePanel extends JPanel {
 	//			}
 		}
 		
+		
+        
+		
 	}
+	
 	
 	public void setStartAndEndPointNull() {
 		startPoint = null;

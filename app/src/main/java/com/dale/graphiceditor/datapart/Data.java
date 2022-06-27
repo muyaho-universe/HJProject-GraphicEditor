@@ -24,6 +24,8 @@ public class Data {
       this.sketch = ske;
    }
    
+   
+   
    public Object getShape() {
 	   return shape;
    }

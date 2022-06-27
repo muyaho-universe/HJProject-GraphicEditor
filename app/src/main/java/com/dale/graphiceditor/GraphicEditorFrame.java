@@ -3,7 +3,10 @@ package com.dale.graphiceditor;
 import java.awt.*;
 
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
@@ -135,8 +138,16 @@ public class GraphicEditorFrame extends JFrame{
                 FileDialog fileDialogOpen = new FileDialog(GraphicEditorFrame.this, "파일 열기", FileDialog.LOAD);
                 fileDialogOpen.setVisible(true);
                 String filePath = fileDialogOpen.getDirectory() + fileDialogOpen.getFile();
-                MyDatas.loadedImage = filePath;
-                System.out.println(filePath);
+                if(filePath.contains(".png")) {
+                	try {
+                		MyDatas.isLoaded =true;
+                		MyDatas.loadedImage = ImageIO.read(new File(filePath));
+                		GraphicEditorFrame.this.getSketchArea().getResizable().getDrawing().repaint();
+                     } catch (IOException ex) {
+                          // handle exception...
+                     }
+                }
+                
             }
         });
 		

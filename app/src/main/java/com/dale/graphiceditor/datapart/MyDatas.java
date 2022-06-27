@@ -21,8 +21,8 @@ public class MyDatas {
 	public static Stack<Integer> strokeRedoMemory = new Stack<Integer>();
 	public static ArrayList<Point> sketchMemory = new ArrayList<Point>();
 	public static Stack<Data> memo = new Stack<Data>();
-	
+	public static boolean isLoaded = false;
 	
 	public static BufferedImage currentImage;
-	public static String loadedImage = null;
+	public static Image loadedImage = null;
 }
