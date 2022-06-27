@@ -1,6 +1,7 @@
 package com.dale.graphiceditor.datapart;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.Vector;
@@ -19,4 +20,6 @@ public class MyDatas {
 	public static Stack<Color> colorRedoMemory = new Stack<Color>();
 	public static Stack<Integer> strokeRedoMemory = new Stack<Integer>();
 	public static ArrayList<Point> sketchMemory ;
+	
+	public static BufferedImage currentImage;
 }

@@ -1,17 +1,26 @@
 package com.dale.graphiceditor;
 
+import java.awt.AWTException;
 import java.awt.Color;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.image.BufferedImage;
+import java.awt.image.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import com.dale.graphiceditor.buttons.AngleDragButton;
 import com.dale.graphiceditor.buttons.BottomDragButton;
 import com.dale.graphiceditor.buttons.RightDragButton;
+import com.dale.graphiceditor.datapart.MyDatas;
 import com.dale.graphiceditor.panel.DrawablePanel;
 import com.dale.graphiceditor.panel.ResizablePanel;
 
 @SuppressWarnings("serial")
-public class SkectchArea extends JPanel {
+public class SkectchArea extends JPanel  {
 	
 	
 	public SkectchArea() {
@@ -40,5 +49,6 @@ public class SkectchArea extends JPanel {
 		this.setBounds(GraphicEditorFrame.skectchAreaPanelX, GraphicEditorFrame.skectchAreaPanelY,
 				GraphicEditorFrame.skectchAreaPanelWidth, GraphicEditorFrame.skectchAreaPanelHeight);
 	}
+	
 	
 }

@@ -3,6 +3,8 @@ package com.dale.graphiceditor.panel;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.MouseInputAdapter;
 
 import com.dale.graphiceditor.GraphicEditorFrame;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.Vector;
 
-public class DrawablePanel extends JPanel{
+public class DrawablePanel extends JPanel {
 	private boolean hasMouse = false;
 	private boolean isDrawing = false;
 	private ArrayList<Point> startVector = new ArrayList<Point>();
@@ -41,6 +43,8 @@ public class DrawablePanel extends JPanel{
 		this.setMaximumSize(new Dimension(GraphicEditorFrame.monitorWidth, GraphicEditorFrame.skectchAreaPanelHeight / 2));	
 		this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		this.addMouseListener(new MyMouseListener());
+		this.addMouseMotionListener(new MyMouseListener());
+		
 //		this.addMouseMotionListener(null)
 	}
 	
@@ -93,7 +97,7 @@ public class DrawablePanel extends JPanel{
 	            memo.add(new Data(shape, MyMouse.currentColor, MyMouse.currentStroke));
 	            repaint();
 	         }
-	         if (MyMouse.currentMode.equals("PolyLine")) {
+	         if (MyMouse.currentMode.equals("Polyline")) {
 	            memo.add(new Data(MyDatas.sketchMemory, MyMouse.currentColor, MyMouse.currentStroke));
 
 	            repaint();
@@ -107,6 +111,14 @@ public class DrawablePanel extends JPanel{
 //	         shapeRedoMemory.clear();
 //	         colorRedoMemory.clear();
 //	         strokeRedoMemory.clear();
+	         
+	         try {
+	 			MyDatas.currentImage = new Robot().createScreenCapture(new Rectangle(DrawablePanel.this.getLocationOnScreen().x, DrawablePanel.this.getLocationOnScreen().y,DrawablePanel.this.getWidth(), DrawablePanel.this.getHeight()));
+	 			System.out.println(MyDatas.currentImage);
+	 		} catch (AWTException e1) {
+	 			// TODO Auto-generated catch block
+	 			e1.printStackTrace();
+	 		}
 	      }
 	      
 	      @Override
@@ -124,7 +136,7 @@ public class DrawablePanel extends JPanel{
 	         int absX = Math.abs(startPoint.x - endPoint.x);
 	         int absY = Math.abs(startPoint.y - endPoint.y);
 	         if (MyMouse.currentMode.equals("Line")) {
-//	            repaint();
+	            repaint();
 	            g2.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
 	            return;
 	         }
@@ -138,7 +150,7 @@ public class DrawablePanel extends JPanel{
 	            g2.drawOval(twoDx, twoDy, absX, absY);
 	            return;
 	         }
-	         if (MyMouse.currentMode.equals("PolyLine")) {// sketch
+	         if (MyMouse.currentMode.equals("Polyline")) {// sketch
 	            if (b.x != 0 && b.y != 0) {
 	               a.x = b.x;
 	               a.y = b.y;
@@ -178,7 +190,7 @@ public class DrawablePanel extends JPanel{
 	   }
 	
 	public void paintComponent(Graphics g){
-		super.paintComponent(g); // 부모 페인트호출
+	    super.paintComponent(g); // 부모 페인트호출
 		Graphics2D g2 = (Graphics2D) g.create();
 		
 		if (!memo.isEmpty()) {
@@ -198,7 +210,27 @@ public class DrawablePanel extends JPanel{
 	            }
 //	               System.out.println(memo.get(i).getColor());
 	         }
-	      }
+		}
+		if(startPoint != null) {
+			g2.setStroke(new BasicStroke(MyMouse.currentStroke));
+			g2.setColor(MyMouse.currentColor);
+			
+			if(MyMouse.currentMode.equals("Line")) g2.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);	
+			else if(MyMouse.currentMode.equals("Quadrangle")) g.drawRect(Math.min(startPoint.x, endPoint.x), Math.min(startPoint.y, endPoint.y),Math.abs(endPoint.x - startPoint.x),Math.abs(endPoint.y - startPoint.y));
+			else if(MyMouse.currentMode.equals("Circle")) g.drawOval(Math.min(startPoint.x, endPoint.x), Math.min(startPoint.y, endPoint.y),Math.abs(endPoint.x - startPoint.x),Math.abs(endPoint.y - startPoint.y));
+			else if(MyMouse.currentMode.equals("PolyLine")) {
+				for(int i =0; i<MyDatas.sketchMemory.size()-1; i++) {
+					g2.drawLine(MyDatas.sketchMemory.get(i).x, MyDatas.sketchMemory.get(i).y, MyDatas.sketchMemory.get(i+1).x, MyDatas.sketchMemory.get(i+1).y);
+				}
+			}
+	//			else if(GraphicEditor.tool.equals("Eraser")) {
+	//				for(int i =0; i<pointArrayList.size()-1; i++) {
+	//					g2.setColor(Color.WHITE);
+	//					g.drawLine(pointArrayList.get(i).x, pointArrayList.get(i).y, pointArrayList.get(i+1).x, pointArrayList.get(i+1).y);
+	//				}
+	//			}
+		}
+	
 	} 
-
+	
 }
