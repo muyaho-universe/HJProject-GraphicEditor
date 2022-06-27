@@ -21,11 +21,11 @@ import com.dale.graphiceditor.panel.ResizablePanel;
 
 @SuppressWarnings("serial")
 public class SkectchArea extends JPanel  {
-	
+	ResizablePanel skectchAreaPanel;
 	
 	public SkectchArea() {
 		
-		ResizablePanel skectchAreaPanel =  new ResizablePanel();
+		skectchAreaPanel =  new ResizablePanel();
 	
 		//START POINT: setting skectchAreaPanel GraphicEditorFrame.skectchAreaPanelX, GraphicEditorFrame.skectchAreaPanelY
 		
@@ -50,5 +50,7 @@ public class SkectchArea extends JPanel  {
 				GraphicEditorFrame.skectchAreaPanelWidth, GraphicEditorFrame.skectchAreaPanelHeight);
 	}
 	
-	
+	public ResizablePanel getResizable() {
+		return skectchAreaPanel;
+	}
 }

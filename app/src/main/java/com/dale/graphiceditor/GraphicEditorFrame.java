@@ -37,7 +37,7 @@ public class GraphicEditorFrame extends JFrame{
 	static public int drawablePanelHeight; // = skectchAreaPanelHeight / 2
 	static public int drawablePanelX = 5;
 	static public int drawablePanelY = 5;
-
+	SkectchArea skectchArea;
 	static private String title = "Graphic Editor";
 	private int x;
     private int y;
@@ -113,7 +113,7 @@ public class GraphicEditorFrame extends JFrame{
 		//END POINT
 		
 		//START POINT: setting skectchAreaPanel
-		SkectchArea skectchArea = new SkectchArea();
+		skectchArea = new SkectchArea();
 		
 		System.out.println(GraphicEditorFrame.skectchAreaPanelX+" "+ GraphicEditorFrame.skectchAreaPanelY+" "+ 
 				GraphicEditorFrame.skectchAreaPanelWidth+" "+ GraphicEditorFrame.skectchAreaPanelHeight);
@@ -124,10 +124,10 @@ public class GraphicEditorFrame extends JFrame{
 		
 //		mainPanel.add(attributesPanel);
 		mainPanel.add(toolsPanel);
-		mainPanel.add(additionalFunctionPanel);
+		
 		mainPanel.add(skectchArea);
 		this.setJMenuBar(additionalFunctionPanel.menuBar);
-
+		additionalFunctionPanel.setSize();
 		
 		additionalFunctionPanel.menuBar.getMenu().getLoadFileMenuItem().addActionListener(new ActionListener() {
             @Override
@@ -144,15 +144,35 @@ public class GraphicEditorFrame extends JFrame{
 		RedoButton redo = new RedoButton();
 		
 		undo.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.print(MyDatas.memo.size());
 				// TODO Auto-generated method stub
-				
+				if(MyDatas.memo.size() > 0) {
+					MyDatas.shapeRedoMemory.push(MyDatas.memo.pop());
+//					MyDatas.sketchMemory.remove(MyDatas.shapeRedoMemory.size()-1);
+					GraphicEditorFrame.this.getSketchArea().getResizable().getDrawing().setStartAndEndPointNull();
+					GraphicEditorFrame.this.getSketchArea().getResizable().getDrawing().repaint();
+					System.out.print("dkdkdk");
+				}
 			}
-			
 		});
-		
+		redo.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.print(MyDatas.shapeRedoMemory.size());
+				// TODO Auto-generated method stub
+				if(MyDatas.shapeRedoMemory.size() > 0) {
+					MyDatas.memo.push(MyDatas.shapeRedoMemory.pop());
+
+					GraphicEditorFrame.this.getSketchArea().getResizable().getDrawing().repaint();
+					System.out.print("dkdkdk");
+				}
+			}
+		});
+		additionalFunctionPanel.add(undo);
+		additionalFunctionPanel.add(redo);
+		mainPanel.add(additionalFunctionPanel);
 		this.add(mainPanel);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -161,4 +181,7 @@ public class GraphicEditorFrame extends JFrame{
 		//END POINT
 	}
 	
+	public SkectchArea getSketchArea() {
+		return skectchArea;
+	}
 }

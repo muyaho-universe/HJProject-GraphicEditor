@@ -91,5 +91,7 @@ public class ResizablePanel extends JPanel {
 		angleDragButton.setDragPoint(dragLocation);
 		
 	}
-	
+	public DrawablePanel getDrawing() {
+		return drawablePanel;
+	}
 }

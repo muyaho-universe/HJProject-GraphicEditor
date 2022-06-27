@@ -16,10 +16,12 @@ public class MyDatas {
 	public static Stack<Object> shapeMemory = new Stack<Object>();
 	public static Stack<Color> colorMemory = new Stack<Color>();
 	public static Stack<Integer> strokeMemory = new Stack<Integer>();
-	public static Stack<Object> shapeRedoMemory = new Stack<Object>();
+	public static Stack<Data> shapeRedoMemory = new Stack<Data>();
 	public static Stack<Color> colorRedoMemory = new Stack<Color>();
 	public static Stack<Integer> strokeRedoMemory = new Stack<Integer>();
-	public static ArrayList<Point> sketchMemory ;
+	public static ArrayList<Point> sketchMemory = new ArrayList<Point>();
+	public static Stack<Data> memo = new Stack<Data>();
+	
 	
 	public static BufferedImage currentImage;
 	public static String loadedImage = null;

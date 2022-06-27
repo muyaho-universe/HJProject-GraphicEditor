@@ -31,7 +31,7 @@ public class DrawablePanel extends JPanel {
 	private boolean isDrawing = false;
 	private ArrayList<Point> startVector = new ArrayList<Point>();
 	private ArrayList<Point> endVector = new ArrayList<Point>();
-	Stack<Data> memo = new Stack<Data>();
+	
 	private Point startPoint = null;
 	private Point endPoint = null;
 	private BufferedImage image;
@@ -67,7 +67,6 @@ public class DrawablePanel extends JPanel {
 	          b.setLocation(0, 0);
 	          System.out.println("무야호~");
 	         a.setLocation(e.getX(), e.getY());
-	         MyDatas.sketchMemory = new ArrayList<Point>();
 	      }
 	      
 	      @Override
@@ -88,23 +87,23 @@ public class DrawablePanel extends JPanel {
 	         if (MyMouse.currentMode.equals("Line")) {
 	            shape = new Line2D.Double(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
 	            //g2.draw(shape);
-	            memo.add(new Data(shape, MyMouse.currentColor, MyMouse.currentStroke));
+	            MyDatas.memo.add(new Data(shape, MyMouse.currentColor, MyMouse.currentStroke));
 	            repaint();
 	         }
 	         if (MyMouse.currentMode.equals("Quadrangle")) {
 	            shape = new Rectangle2D.Double(twoDx, twoDy, absX, absY);
 	            //g2.draw(shape);
-	            memo.add(new Data(shape, MyMouse.currentColor, MyMouse.currentStroke));
+	            MyDatas.memo.add(new Data(shape, MyMouse.currentColor, MyMouse.currentStroke));
 	            repaint();
 	         }
 	         if (MyMouse.currentMode.equals("Circle")) {
 	            shape = new Ellipse2D.Double(twoDx, twoDy, absX, absY);
 	            //g2.draw(shape);
-	            memo.add(new Data(shape, MyMouse.currentColor, MyMouse.currentStroke));
+	            MyDatas.memo.add(new Data(shape, MyMouse.currentColor, MyMouse.currentStroke));
 	            repaint();
 	         }
 	         if (MyMouse.currentMode.equals("Polyline")) {
-	            memo.add(new Data(MyDatas.sketchMemory, MyMouse.currentColor, MyMouse.currentStroke));
+	        	 MyDatas.memo.add(new Data(MyDatas.sketchMemory, MyMouse.currentColor, MyMouse.currentStroke));
 
 	            repaint();
 	            //sketchMemory.clear();
@@ -201,19 +200,19 @@ public class DrawablePanel extends JPanel {
 	    super.paintComponent(g); // 부모 페인트호출
 		Graphics2D g2 = (Graphics2D) g.create();
 		
-		if (!memo.isEmpty()) {
-	         for (int i = 0; i < memo.size(); i++) {
+		if (!MyDatas.memo.isEmpty()) {
+	         for (int i = 0; i < MyDatas.memo.size(); i++) {
 	            //System.out.println(memo.get(i).shape);
 	            // System.out.println(i+ " "+ memo.get(i));
-	            g2.setColor(memo.get(i).getColor());
-	            g2.setStroke(new BasicStroke(memo.get(i).getStroke()));
-	            if (memo.get(i).getShape() == null) {
-	               for (int j = 0; j < memo.get(i).getSketch().size()-1; j++) {
+	            g2.setColor(MyDatas.memo.get(i).getColor());
+	            g2.setStroke(new BasicStroke(MyDatas.memo.get(i).getStroke()));
+	            if (MyDatas.memo.get(i).getShape() == null) {
+	               for (int j = 0; j < MyDatas.memo.get(i).getSketch().size()-1; j++) {
 	                  //System.out.println(memo.get(i).sketch.get(j).x + " " + memo.get(i).sketch.get(j).y);
-	                  g2.drawLine(memo.get(i).getSketch().get(j).x, memo.get(i).getSketch().get(j).y, memo.get(i).getSketch().get(j+1).x, memo.get(i).getSketch().get(j+1).y);
+	                  g2.drawLine(MyDatas.memo.get(i).getSketch().get(j).x, MyDatas.memo.get(i).getSketch().get(j).y, MyDatas.memo.get(i).getSketch().get(j+1).x, MyDatas.memo.get(i).getSketch().get(j+1).y);
 	               }
 	            } else {
-	               g2.draw((Shape) memo.get(i).getShape());
+	               g2.draw((Shape) MyDatas.memo.get(i).getShape());
 	               
 	            }
 //	               System.out.println(memo.get(i).getColor());
@@ -241,5 +240,8 @@ public class DrawablePanel extends JPanel {
 		
 	}
 	
-	
+	public void setStartAndEndPointNull() {
+		startPoint = null;
+		endPoint = null;
+	}
 }

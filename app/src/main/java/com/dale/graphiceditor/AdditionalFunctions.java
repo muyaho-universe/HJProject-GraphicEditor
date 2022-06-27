@@ -16,7 +16,7 @@ public class AdditionalFunctions extends JPanel {
 	}
 	
 	public void setSize() {
-		setBounds(0, GraphicEditorFrame.additionalFunctionPanelHeight , GraphicEditorFrame.additionalFunctionPanelWidth, GraphicEditorFrame.additionalFunctionPanelHeight);
+		setBounds(0, 0 , GraphicEditorFrame.additionalFunctionPanelWidth, GraphicEditorFrame.additionalFunctionPanelHeight);
 	}
 	
 	
