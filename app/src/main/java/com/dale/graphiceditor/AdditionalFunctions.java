@@ -12,7 +12,7 @@ public class AdditionalFunctions extends JPanel {
 	public MenuBar menuBar;
 	AdditionalFunctions(){
 		setLayout(new FlowLayout());
-		setBackground(Color.BLACK);
+//		setBackground(Color.BLACK);
 	}
 	
 	public void setSize() {

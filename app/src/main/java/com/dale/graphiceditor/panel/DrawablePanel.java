@@ -76,6 +76,7 @@ public class DrawablePanel extends JPanel {
 	         endPoint = e.getPoint(); // 드래그 한부분을 종료점으로
 	         Graphics g = getGraphics();
 	         Graphics2D g2 = (Graphics2D) g;
+	         g2.setBackground(MyMouse.currentColor);
 	         g2.setColor(MyMouse.currentColor);
 	         float[] dash = new float[] { 10, 5, 5, 5 };
 	         // g2.setStroke(new BasicStroke(5,0,BasicStroke.JOIN_MITER,1.0f,dash, 0));
@@ -98,7 +99,7 @@ public class DrawablePanel extends JPanel {
 	         }
 	         if (MyMouse.currentMode.equals("Circle")) {
 	            shape = new Ellipse2D.Double(twoDx, twoDy, absX, absY);
-	            //g2.draw(shape);
+//	            g2.draw(shape);
 	            MyDatas.memo.add(new Data(shape, MyMouse.currentColor, MyMouse.currentStroke));
 	            repaint();
 	         }
@@ -118,7 +119,8 @@ public class DrawablePanel extends JPanel {
 //	         shapeRedoMemory.clear();
 //	         colorRedoMemory.clear();
 //	         strokeRedoMemory.clear();
-	         
+	         startPoint  = null;
+	         endPoint = null;
 	         try {
 	 			MyDatas.currentImage = new Robot().createScreenCapture(new Rectangle(DrawablePanel.this.getLocationOnScreen().x, DrawablePanel.this.getLocationOnScreen().y,DrawablePanel.this.getWidth(), DrawablePanel.this.getHeight()));
 	 			System.out.println(MyDatas.currentImage);
@@ -143,18 +145,21 @@ public class DrawablePanel extends JPanel {
 	         int absX = Math.abs(startPoint.x - endPoint.x);
 	         int absY = Math.abs(startPoint.y - endPoint.y);
 	         if (MyMouse.currentMode.equals("Line")) {
-	            repaint();
+	            
 	            g2.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+	            repaint();
 	            return;
 	         }
 	         if (MyMouse.currentMode.equals("Quadrangle")) {
-	            repaint();
+	            
 	            g2.drawRect(twoDx, twoDy, absX, absY);
+	            repaint();
 	            return;
 	         }
 	         if (MyMouse.currentMode.equals("Circle")) {
-	            repaint();
+	            
 	            g2.drawOval(twoDx, twoDy, absX, absY);
+	            repaint();
 	            return;
 	         }
 	         if (MyMouse.currentMode.equals("Polyline")) {// sketch
@@ -183,8 +188,8 @@ public class DrawablePanel extends JPanel {
 	      }
 
 	      public void mouseMoved(MouseEvent e) { // 지우개 
-	         Graphics g = getGraphics();
-	         Graphics2D g2 = (Graphics2D) g;
+//	         Graphics g = getGraphics();
+//	         Graphics2D g2 = (Graphics2D) g;
 //	         if (Buttons.erase == true) {
 //	            repaint();
 //	            g2.setColor(Color.BLACK);
@@ -211,7 +216,7 @@ public class DrawablePanel extends JPanel {
 //				MyDatas.memo.add(null);
 			}
 	         for (int i = 0; i < MyDatas.memo.size(); i++) {
-	            
+	        	 g2.setBackground(MyDatas.memo.get(i).getColor());
 	            g2.setColor(MyDatas.memo.get(i).getColor());
 	            g2.setStroke(new BasicStroke(MyDatas.memo.get(i).getStroke()));
 	            if (MyDatas.memo.get(i).getShape() == null) {
@@ -220,7 +225,9 @@ public class DrawablePanel extends JPanel {
 	                  g2.drawLine(MyDatas.memo.get(i).getSketch().get(j).x, MyDatas.memo.get(i).getSketch().get(j).y, MyDatas.memo.get(i).getSketch().get(j+1).x, MyDatas.memo.get(i).getSketch().get(j+1).y);
 	               }
 	            } else {
-	               g2.draw((Shape) MyDatas.memo.get(i).getShape());
+	            	Shape temporaryShape = (Shape) MyDatas.memo.get(i).getShape();
+	            	
+	               g2.draw(temporaryShape);
 	               
 	            }
 //	               System.out.println(memo.get(i).getColor());
